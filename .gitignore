@@ -1,0 +1,8 @@
+# Only the study guide is published. Course slides, recordings, transcripts
+# and handouts stay local.
+/*
+!/.gitignore
+!/STUDY_GUIDE.md
+!/build_html.py
+!/_template.html
+!/docs/

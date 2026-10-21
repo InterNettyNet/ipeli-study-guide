@@ -1,0 +1,2156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="IPELI">
+<title>IPELI 期末試験 攻略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Zen+Old+Mincho:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F9; --sheet:#FFFFFF; --ink:#1C2333; --muted:#5A6375; --rule:#D8DCE4;
+  --blue:#2747B0; --marker:#FFE07A; --ok:#2E7D4F; --bar:#1C2333; --red:#C62828; --redbg:#FDE2E2;
+  --serif:"Zen Old Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
+  --sans:"BIZ UDPGothic","Yu Gothic UI","Hiragino Sans","Meiryo",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#12161F; --sheet:#181D28; --ink:#E4E8EF; --muted:#9AA3B5; --rule:#2C3442;
+        --blue:#8FA8FF; --marker:#5C4D12; --ok:#6FCF97; --bar:#E4E8EF; --red:#FF8A80; --redbg:#4A1C1C;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{margin:0; background:var(--paper); color:var(--ink); font:16px/1.85 var(--sans);
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue); outline-offset:2px}
+
+/* toolbar */
+.bar{position:sticky; top:0; z-index:10; display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;
+  padding:.55rem 1rem; background:var(--sheet); border-bottom:1px solid var(--rule)}
+.bar .name{font:900 1.05rem/1 var(--serif); margin-right:auto; letter-spacing:.02em}
+.bar button{font:700 .85rem/1 var(--sans); color:var(--ink); background:transparent;
+  border:1.5px solid var(--rule); border-radius:999px; padding:.55rem .9rem; cursor:pointer}
+.bar button[aria-pressed="true"]{background:var(--bar); color:var(--sheet); border-color:var(--bar)}
+.bar .count{font-size:.85rem; color:var(--muted); font-variant-numeric:tabular-nums}
+#timer{font-variant-numeric:tabular-nums; min-width:7.5em}
+#timer.done{background:#C0392B; color:#fff; border-color:#C0392B}
+#tocBtn{display:none}
+
+/* layout */
+.wrap{display:grid; grid-template-columns:260px minmax(0,1fr); max-width:1180px; margin:0 auto}
+nav.toc{position:sticky; top:52px; align-self:start; max-height:calc(100vh - 52px); overflow:auto;
+  padding:1.5rem 1rem 3rem 1.25rem; font-size:.86rem; line-height:1.5}
+nav.toc a{display:flex; justify-content:space-between; gap:.5rem; text-decoration:none; color:var(--muted);
+  padding:.3rem .5rem; border-left:2px solid transparent}
+nav.toc a.h2{color:var(--ink); font-weight:700; margin-top:.8rem}
+nav.toc a.h3{padding-left:1.1rem}
+nav.toc a.here{border-left-color:var(--blue); color:var(--blue)}
+nav.toc .p{font-size:.75rem; color:var(--ok); white-space:nowrap}
+main{padding:1.5rem clamp(1rem,4vw,3.5rem) 6rem; max-width:52em}
+
+/* type */
+h1,h2,h3{text-wrap:balance}
+h1{font:900 clamp(1.9rem,4.5vw,2.8rem)/1.25 var(--serif); margin:1rem 0 .5rem}
+h2{font:900 1.65rem/1.35 var(--serif); margin:3.5rem 0 1rem; padding-top:1.25rem; border-top:3px double var(--rule)}
+h3{font:600 1.25rem/1.45 var(--serif); margin:2.2rem 0 .6rem}
+h4{font-size:1.02rem; margin:2rem 0 .5rem; display:flex; gap:.6rem; align-items:baseline}
+p,li{max-width:44em}
+blockquote{margin:1rem 0; padding:.6rem 1rem; border-left:3px solid var(--blue); background:var(--sheet); color:var(--ink)}
+blockquote p{margin:.4rem 0}
+code,pre{font-family:"Cascadia Mono",Consolas,monospace; font-size:.85em}
+pre{background:var(--sheet); border:1px solid var(--rule); padding:1rem; overflow:auto; line-height:1.55; border-radius:4px}
+hr{display:none}
+table{border-collapse:collapse; width:100%; font-size:.9rem; line-height:1.6; display:block; overflow-x:auto; margin:1rem 0}
+th,td{border-bottom:1px solid var(--rule); padding:.5rem .6rem; text-align:left; vertical-align:top}
+th{font-weight:700; border-bottom:2px solid var(--ink); white-space:nowrap}
+li.rights{background:linear-gradient(transparent 55%, var(--marker) 55%); list-style:none; margin-left:-1.1rem}
+h5{font-size:1rem; margin:1.6rem 0 .4rem; padding:.35rem .7rem; border-left:4px solid var(--blue); background:var(--sheet)}
+p.scene{background:var(--sheet); border:1px solid var(--rule); border-radius:6px; padding:.7rem 1rem; margin:.6rem 0 1rem}
+p.rights{border-left:4px solid var(--marker); background:color-mix(in srgb, var(--marker) 22%, transparent); padding:.55rem .9rem; border-radius:0 6px 6px 0}
+p.en{font-style:italic; color:var(--muted); border-left:2px dashed var(--rule); padding-left:.9rem}
+b{color:var(--blue)}
+.answers blockquote{font-style:italic}
+del{color:var(--muted)}
+
+/* must-know (赤点回避) */
+mark{background:var(--redbg); color:var(--red); font-weight:700; padding:.05em .2em; border-radius:3px;
+  -webkit-box-decoration-break:clone; box-decoration-break:clone}
+mark strong{color:inherit}
+.mustsec{border:2px solid var(--red); border-radius:10px; padding:0 clamp(1rem,3vw,1.75rem) 1rem; margin-top:2.5rem; background:var(--sheet)}
+.mustsec h2{border-top:0; color:var(--red); margin-top:1.25rem}
+.mustsec strong{color:var(--red)}
+#must[aria-pressed="true"]{background:var(--red); border-color:var(--red); color:#fff}
+body.must .drill, body.must .nomust, body.must table:not(:has(mark)),
+body.must .sec:not(.mustsec):not(.selftest) :is(p, li, tbody tr, blockquote, pre):not(:has(mark)):not(.scene):not(.rights):not(.en),
+body.must .selftest p:not(:has(mark)), body.must .selftest p:not(:has(mark)) + details{display:none}
+
+/* redaction: recall mode and drill answers (section 4) */
+body.recall .recallable mark, body.recall .recallable strong:not(h4 strong):not(mark strong),
+.drill td:nth-child(3), .drill td:nth-child(4){
+  background:var(--bar); color:transparent; border-radius:2px; cursor:pointer;
+  -webkit-box-decoration-break:clone; box-decoration-break:clone; transition:background .15s, color .15s}
+body.recall .recallable mark.shown, body.recall .recallable strong.shown, .drill td.shown, .drill.all td{
+  background:transparent; color:inherit; cursor:auto}
+.drill td:nth-child(3).shown{font-weight:700}
+.drill td a, body.recall .recallable strong a{pointer-events:none}
+.tools{display:flex; gap:.5rem; margin:.5rem 0 1rem}
+.tools button{font:700 .85rem var(--sans); color:var(--ink); background:var(--sheet);
+  border:1.5px solid var(--rule); border-radius:999px; padding:.5rem .9rem; cursor:pointer}
+
+/* checkmarks */
+.chk{appearance:none; flex:none; width:1.15rem; height:1.15rem; border:2px solid var(--muted); border-radius:3px;
+  margin:0 .5rem 0 0; vertical-align:-.2em; cursor:pointer; position:relative}
+.chk:checked{background:var(--ok); border-color:var(--ok)}
+.chk:checked::after{content:""; position:absolute; left:.3rem; top:.05rem; width:.3rem; height:.6rem;
+  border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg)}
+
+/* self-test */
+.selftest details{margin:.2rem 0 1.4rem; border:1px solid var(--rule); border-radius:4px; background:var(--sheet)}
+.selftest summary{cursor:pointer; padding:.5rem .9rem; color:var(--blue); font-weight:700; font-size:.9rem}
+.selftest details[open] summary{border-bottom:1px solid var(--rule)}
+.selftest details p{margin:.6rem .9rem}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  #tocBtn{display:inline-block}
+  nav.toc{display:none; position:fixed; inset:52px 0 0 0; max-height:none; background:var(--sheet); z-index:9}
+  nav.toc.open{display:block}
+}
+@media print{.bar,nav.toc,.tools{display:none} .wrap{display:block} body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="bar" role="toolbar" aria-label="勉強ツール">
+  <span class="name">IPELI 攻略</span>
+  <button id="tocBtn" aria-expanded="false">目次</button>
+  <button id="must" aria-pressed="false" title="赤い印（赤点回避の必須情報）だけを表示">最低限モード</button>
+  <button id="recall" aria-pressed="false" title="太字と赤い印のキーワードを隠す。タップで1つずつ表示">暗記モード</button>
+  <button id="timer" title="答案1問ぶんの練習（30分）">30:00 開始</button>
+  <span class="count" id="count"></span>
+</div>
+<div class="wrap">
+  <nav class="toc" id="toc" aria-label="目次"></nav>
+  <main id="main">
+<h1 id="ipeli-3">IPELI 期末試験 3時間 完全攻略ガイド</h1>
+<blockquote>
+<p>全資料（スライド0〜10、Activity 1〜5、Revision 1〜4、MCQ PDF、Revision録画2本）を元に作成。<br />
+試験は英語なので、<strong>覚える文は英語のまま</strong>載せています。</p>
+</blockquote>
+<hr />
+<section class="sec"><h2 id="0-3">0. 3時間プラン（この順でやる）</h2>
+<table>
+<thead>
+<tr>
+<th>時間</th>
+<th>やること</th>
+<th>セクション</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:15</td>
+<td>試験の型・採点ポイント・答案テンプレを覚える</td>
+<td>§1</td>
+</tr>
+<tr>
+<td>0:15–1:00</td>
+<td>知識チートシート（★印＝IP 3種・ACM・理論・PDPA・CCA を最優先）</td>
+<td>§2</td>
+</tr>
+<tr>
+<td>1:00–2:00</td>
+<td>Revision 1〜4 の全16問の骨子を読む → 4問だけ選んで<strong>30分で文章答案を手書き/タイプ</strong>（本番練習）</td>
+<td>§3</td>
+</tr>
+<tr>
+<td>2:00–2:20</td>
+<td>概念ドリル（Kahoot問題、答えを隠して即答）</td>
+<td>§4</td>
+</tr>
+<tr>
+<td>2:20–2:50</td>
+<td>白紙テスト：§5 に何も見ずに答える。間違えた所だけ戻る</td>
+<td>§5</td>
+</tr>
+<tr>
+<td>2:50–3:00</td>
+<td><strong>Safe Exam Browser が自分のPCで動くか確認</strong>（講師が念押し）＋Moodleのサンプル試験と採点基準を眺める</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🟥 <strong>時間がないとき</strong>：<mark>「赤点回避セット」を覚える → §3 の赤い部分を読む → 寝る</mark></p>
+<p>📅 録画によると <strong>試験は 10月22日（＝明日）</strong>。今夜3時間で仕上げて、寝ること。</p>
+</blockquote>
+<hr />
+</section><section class="sec mustsec recallable"><h2 id="_1">🟥 赤点回避セット（これだけは絶対に覚える）</h2>
+<blockquote>
+<p><strong>赤い印＝落とさないための最低限。</strong> 上のバーの「<strong>最低限モード</strong>」を押すと、ガイド全体で赤い印の部分だけが残ります。<br />
+時間がなければ <strong>このセット → §3 の赤い部分 → 寝る</strong>。余裕があれば他も読む。</p>
+</blockquote>
+<h3 id="1">① 答案の書き方（守るだけで点が入る）</h3>
+<ul>
+<li>4問すべて解答、<strong>1問30分</strong>。<strong>箇条書きではなく文章で書く</strong></li>
+<li>各ポイント＝<strong>定義（define）→ 説明（explain）→ シナリオの例（apply）</strong></li>
+<li><strong>10点＝3ポイント、15点＝5〜6ポイント</strong></li>
+<li><strong>対立する権利（competing rights）を2組</strong>書く："There are competing rights between users' right to privacy and the company's commercial interest."</li>
+<li>利害関係者を<strong>最低2者</strong>（例：ユーザーと会社）</li>
+</ul>
+<h3 id="2-3">② 倫理理論 3つ</h3>
+<table>
+<thead>
+<tr>
+<th>理論</th>
+<th>一言で</th>
+<th>答案での英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Deontology（義務論）</strong></td>
+<td>結果に関係なく、嘘・隠蔽・無断使用はダメ</td>
+<td>"It is wrong regardless of the consequences, because there is a <strong>duty</strong> to be honest."</td>
+</tr>
+<tr>
+<td><strong>Utilitarianism（功利主義）</strong></td>
+<td>一番多くの人が幸せになる選択が正しい</td>
+<td>"the <strong>greatest good for the greatest number</strong>"</td>
+</tr>
+<tr>
+<td><strong>Natural Rights（自然権）</strong></td>
+<td>人には生まれつきの権利（プライバシー・財産・自由）がある</td>
+<td>"individuals' <strong>natural rights</strong> such as privacy and property"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-acm-5">③ ACM 5つ（番号は不要）</h3>
+<ul>
+<li><strong>Avoid harm</strong> — 害を与えない（ほぼ全問で使える）</li>
+<li><strong>Contribute to society and human well-being</strong> — 社会と人々の幸せに貢献する</li>
+<li><strong>Be honest and trustworthy</strong> — 正直（隠す・だます問題）</li>
+<li><strong>Respect privacy</strong> — プライバシー（データ収集・監視の問題）</li>
+<li><strong>Respect the work required to produce creative works</strong> — 他人の創作を尊重（著作権・盗作・AI の問題）</li>
+</ul>
+<h3 id="4-ip-33">④ IP は3つだけ（試験はこの3つ）</h3>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>何を守る</th>
+<th>期間</th>
+<th>必ず書くこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copyright（著作権）</strong><br>Copyright Act 1987</td>
+<td>創作の<strong>表現</strong>（コード・画像・動画・音楽）。アイデアは守らない</td>
+<td>作者の死後<strong>50年</strong></td>
+<td><strong>登録不要・自動</strong>で発生</td>
+</tr>
+<tr>
+<td><strong>Patent（特許）</strong><br>Patents Act 1983</td>
+<td><strong>発明</strong></td>
+<td><strong>20年</strong></td>
+<td>3要件：<strong>new／inventive step／industrially applicable</strong></td>
+</tr>
+<tr>
+<td><strong>Trademark（商標）</strong><br>Trademarks Act 2019</td>
+<td>ロゴ・名前・配色・スローガン（どこの商品か区別する目印）</td>
+<td><strong>10年</strong>ごとに更新</td>
+<td><strong>MyIPO に登録</strong>。似ていて<strong>混同（confusion）</strong>させたら侵害。未登録なら <strong>passing off</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-ip-ip">⑤ IP が侵害されたときの救済（IP の問題で必ず書く）</h3>
+<ul>
+<li><strong>Injunction</strong>（差止）：使用をやめさせる</li>
+<li><strong>Damages</strong>（損害賠償）：お金で補償させる</li>
+<li><strong>Account of profits</strong>（利益の吐き出し）：相手の儲けを渡させる</li>
+<li><strong>Settlement / negotiation</strong>（和解・交渉）：裁判より早く安い</li>
+</ul>
+<h3 id="6">⑥ プライバシー・サイバー犯罪・表現の自由</h3>
+<ul>
+<li><strong>PDPA 2010</strong>（マレーシアの個人情報保護法）：<strong>同意を取る（obtain consent）</strong>・<strong>目的以外に使わない／渡さない（use data only for the stated purpose / no disclosure without consent）</strong>・<strong>安全に管理（keep data secure）</strong>・漏洩したら<strong>当局に報告（notify the Commissioner）</strong></li>
+<li>EU は <strong>GDPR</strong>（漏洩は <strong>72時間以内</strong>に報告）</li>
+<li>サイバー犯罪＝コンピュータが<strong>道具（tool）か標的（target）</strong>になる犯罪。<strong>Computer Crimes Act 1997 s3 ＝ unauthorised access（不正アクセス）</strong></li>
+<li>表現の自由（freedom of speech）は憲法 <strong>Art 10</strong> で保障。ただし<strong>制限あり（not absolute）</strong>（ネットの悪質な投稿は <strong>CMA 1998 s233</strong>）</li>
+</ul>
+<h3 id="7">⑦ 対立する権利の定番ペア（シナリオに当てはめるだけ）</h3>
+<ul>
+<li>ユーザーの<strong>プライバシー</strong> vs 会社の<strong>商業的利益</strong><br />
+<em>users' right to privacy vs the company's commercial interest</em></li>
+<li>クリエイターの<strong>IP（著作権など）</strong> vs 社会の<strong>アクセス・イノベーション</strong><br />
+<em>creators' intellectual property rights vs public access and innovation</em></li>
+<li><strong>表現の自由</strong> vs <strong>名誉・公共の秩序</strong><br />
+<em>freedom of expression vs the right to reputation and public order</em></li>
+<li>社会の<strong>知る権利</strong> vs 個人の<strong>プライバシー・安全</strong><br />
+<em>the public's right to know vs individuals' right to privacy and security</em></li>
+<li><strong>政府の規制（公共の利益）</strong> vs <strong>企業の自由</strong><br />
+<em>government regulation in the public interest vs commercial freedom</em></li>
+</ul>
+<hr />
+</section><section class="sec mustsec recallable"><h2 id="_2">🧩 答案の型（赤点回避：これで書く）</h2>
+<blockquote>
+<p>本番の小問は、ほぼこの <strong>5つの型</strong> のどれか。問題文の動詞と単語で型を決めて、<strong>英文の枠に部品をはめる</strong>だけ。<br />
+［　］が穴。ここに <strong>シナリオの言葉</strong> と <strong>部品</strong> を入れる。</p>
+</blockquote>
+<h3 id="_3">🧱 設計図：答案はブロックを積むだけ</h3>
+<table>
+<thead>
+<tr>
+<th>順番</th>
+<th>ブロック</th>
+<th>書き出し（固定）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>導入（1文）</td>
+<td>"This scenario raises several ［social / ethical / legal］ issues."</td>
+</tr>
+<tr>
+<td>②</td>
+<td><strong>ポイントの4文セット</strong>（10点→×3、15点→×5）</td>
+<td><strong>Firstly,</strong> ［論点］ is a major concern. <strong>Under</strong> ［ACM / 法律］, ［ルール］. <strong>In this scenario,</strong> ［シナリオの例］. <strong>Therefore,</strong> ［問題である］.</td>
+</tr>
+<tr>
+<td>③</td>
+<td>対立する権利（1文・必須）</td>
+<td>"There are competing rights between ［A］'s right to ［X］ and ［B］'s interest in ［Y］."</td>
+</tr>
+<tr>
+<td>④</td>
+<td>結論（1文）</td>
+<td>"On balance, ［技術］ is justified only if ［条件］. Therefore, a balance between innovation and individual rights is needed."</td>
+</tr>
+</tbody>
+</table>
+<p>💡 4文セットの合言葉：<strong>「何が・ルールは・ここでは・だから」</strong>（Firstly → Under → In this scenario → Therefore）。2つ目以降は Secondly / Thirdly / Furthermore に変えるだけ。<br />
+💡 型によって変わるのは <strong>② に入れる中身だけ</strong>。①③④ はどの型でも同じ。</p>
+<h3 id="0">⓪ どの型？（問題文の言葉で決める）</h3>
+<table>
+<thead>
+<tr>
+<th>問題文にある言葉</th>
+<th>型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>types of IP / IP protection / remedies / infringement</td>
+<td><strong>型A：IP と救済</strong></td>
+</tr>
+<tr>
+<td>ACM / should he disclose / is it ethical / professional</td>
+<td><strong>型B：ACM で判断</strong></td>
+</tr>
+<tr>
+<td>describe the (social / ethical) issues / concerns / risks</td>
+<td><strong>型C：問題点を説明</strong></td>
+</tr>
+<tr>
+<td>legal consequences / liability / recommend measures / prevent</td>
+<td><strong>型D：法的責任と対策</strong></td>
+</tr>
+<tr>
+<td>should … be regulated / is it justified / evaluate / balance</td>
+<td><strong>型E：賛否を論じる</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">🔑 全部の型で使う「共通の枠」（まずこれを暗記）</h3>
+<p><strong>① 導入（1〜2文）</strong></p>
+<blockquote>
+<p>"［キーワード］ refers to ［定義］. In this scenario, ［シナリオで起きたこと］. This answer discusses ［何を論じるか］."</p>
+</blockquote>
+<p><strong>② 1ポイント（define → explain → example）</strong></p>
+<blockquote>
+<p>"Firstly, ［論点］ is a major concern. Under ［ACM / 法律 / 理論］, ［それが何を求めるか］. In this scenario, ［シナリオの具体例］. Therefore, ［違反している / 問題である］."</p>
+</blockquote>
+<p><strong>③ 対立する権利（毎問2組）</strong></p>
+<blockquote>
+<p>"There are competing rights between ［A］'s right to ［X］ and ［B］'s ［interest in Y］."</p>
+</blockquote>
+<p><strong>④ 結論</strong></p>
+<blockquote>
+<p>"On balance, ［技術・行動］ is justified only if ［条件：consent / transparency / security］. Therefore, a balance between innovation and individual rights is needed."</p>
+</blockquote>
+<p><strong>つなぎ</strong>：Firstly → Secondly → Thirdly → Furthermore → However → Therefore → In conclusion</p>
+<hr />
+<h3 id="aip-types-of-ip-remedies">型A：IP と救済（"types of IP" "remedies"）</h3>
+<p><strong>手順</strong>：シナリオの手がかり語 → IP を決める → IP ごとに②の枠 → 救済を4つ</p>
+<table>
+<thead>
+<tr>
+<th>シナリオの言葉</th>
+<th>IP</th>
+<th>はめる部品</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>logo, name, slogan, colour, brand</td>
+<td><strong>Trademark</strong></td>
+<td>Trademarks Act 2019／a sign that distinguishes goods or services／register with MyIPO／<strong>likely to cause confusion</strong>／未登録なら passing off</td>
+</tr>
+<tr>
+<td>design, character, music, video, code, artwork</td>
+<td><strong>Copyright</strong></td>
+<td>Copyright Act 1987／protects <strong>expression</strong>, not ideas／<strong>automatic</strong>／copying without permission = <strong>infringement (s36)</strong></td>
+</tr>
+<tr>
+<td>invention, new technology, technical method</td>
+<td><strong>Patent</strong></td>
+<td>Patents Act 1983／<strong>new, inventive step, industrially applicable</strong>／20 years</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IP の枠</strong></p>
+<blockquote>
+<p>"Firstly, ［名前・ロゴ］ can be protected as a <strong>trademark</strong> under the Trademarks Act 2019. A trademark is a sign that distinguishes the goods or services of one trader from those of another. In this case, ［相手］'s similar ［ロゴ］ is likely to cause confusion, because ［例：users downloaded the wrong app］."</p>
+</blockquote>
+<p><strong>救済の枠（4つ繰り返す）</strong></p>
+<blockquote>
+<p>"［権利者］ can apply for / claim ［救済］, which means ［意味］. In this case, ［効果］."</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>救済</th>
+<th>意味（英語）</th>
+<th>効果の例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>injunction</strong></td>
+<td>a court order to stop the infringement</td>
+<td>stops further copying and confusion</td>
+</tr>
+<tr>
+<td><strong>damages</strong></td>
+<td>monetary compensation for loss</td>
+<td>lost sales / subscriptions</td>
+</tr>
+<tr>
+<td><strong>account of profits</strong></td>
+<td>the infringer gives up its profits</td>
+<td>stops it benefiting financially</td>
+</tr>
+<tr>
+<td><strong>settlement / negotiation</strong></td>
+<td>an agreement outside court</td>
+<td>faster and cheaper than a long court case</td>
+</tr>
+</tbody>
+</table>
+<p class="rights">🔁 <strong>権利</strong>："the owner's right to protect its intellectual property vs the competitor's freedom to compete"</p>
+<hr />
+<h3 id="bacm-using-the-acm-code-should-he">型B：ACM で判断（"Using the ACM Code…" "should he…"）</h3>
+<p><strong>手順</strong>：ACM を3つ当てはめる → 「する場合／しない場合」を利害関係者ごとに → 一番良い行動</p>
+<p><strong>ACM の枠（3回繰り返す）</strong></p>
+<blockquote>
+<p>"Under the ACM principle <strong>［原則名］</strong>, computing professionals must ［意味］. In this scenario, if ［人物］ ［行動］, ［誰］ could ［被害］. Therefore, ［行動］ would breach this principle."</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>よく使う ACM</th>
+<th>意味（英語）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Avoid harm</strong></td>
+<td>avoid negative consequences such as financial loss or data breaches</td>
+</tr>
+<tr>
+<td><strong>Contribute to society and human well-being</strong></td>
+<td>use technology to protect people's safety and well-being</td>
+</tr>
+<tr>
+<td><strong>Be honest and trustworthy</strong></td>
+<td>be transparent and do not mislead others</td>
+</tr>
+<tr>
+<td><strong>Respect privacy</strong></td>
+<td>collect personal data only with informed consent</td>
+</tr>
+<tr>
+<td><strong>Respect the work required to produce creative works</strong></td>
+<td>do not copy others' work without permission</td>
+</tr>
+</tbody>
+</table>
+<p><strong>比較の枠</strong></p>
+<blockquote>
+<p>"If ［人物］ ［する］, ［利害関係者1］ would ［影響］, and ［利害関係者2］ would ［影響］. On the other hand, if ［人物］ ［しない］, ［影響］. The best option is ［第3の道：report privately / disclose AI use / ask permission］."</p>
+</blockquote>
+<p><strong>理論を1文</strong>："This reflects <strong>deontology</strong>, because there is a duty to ［be honest / act responsibly］ regardless of the consequences."</p>
+<hr />
+<h3 id="cdescribe-the-issues">型C：問題点を説明（"Describe the issues"）</h3>
+<p><strong>手順</strong>：シナリオの言葉から論点を <strong>3つ</strong> 選ぶ → 各論点を②の枠で</p>
+<table>
+<thead>
+<tr>
+<th>シナリオの言葉</th>
+<th>論点（英語）</th>
+<th>根拠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collects data, monitoring, tracking, biometric, without informing</td>
+<td><strong>privacy and lack of informed consent</strong></td>
+<td>Respect privacy／PDPA</td>
+</tr>
+<tr>
+<td>wrong result, error, injury, leak, fraud</td>
+<td><strong>harm and safety</strong></td>
+<td>Avoid harm</td>
+</tr>
+<tr>
+<td>not disclosed, hidden, users unaware, fake</td>
+<td><strong>deception and lack of transparency</strong></td>
+<td>Be honest／deontology</td>
+</tr>
+<tr>
+<td>disabled, excluded, unequal, bias</td>
+<td><strong>discrimination and exclusion</strong></td>
+<td>Be fair／natural rights</td>
+</tr>
+<tr>
+<td>copied, AI-generated, artists, without permission</td>
+<td><strong>IP infringement and devaluing creativity</strong></td>
+<td>Respect creative works／Copyright Act</td>
+</tr>
+<tr>
+<td>many hours, teenagers, addictive</td>
+<td><strong>addiction and well-being</strong></td>
+<td>Contribute to well-being</td>
+</tr>
+<tr>
+<td>replaces workers, cheaper than humans</td>
+<td><strong>unemployment</strong></td>
+<td>utilitarianism（得する人と損する人）</td>
+</tr>
+<tr>
+<td>leaked, hacked</td>
+<td><strong>data security and loss of trust</strong></td>
+<td>PDPA Security Principle</td>
+</tr>
+</tbody>
+</table>
+<p class="rights">🔁 <strong>最後に必ず</strong>："There are competing rights between ［会社］'s interest in innovation and ［ユーザー］'s right to ［privacy / safety / fair treatment］."</p>
+<hr />
+<h3 id="dlegal-consequences-recommend-measures">型D：法的責任と対策（"legal consequences" "recommend measures"）</h3>
+<p><strong>手順</strong>：①犯人の責任 → ②組織の責任 → ③対策（法的＋技術的＋人間のチェック）</p>
+<table>
+<thead>
+<tr>
+<th>誰の責任？</th>
+<th>法律</th>
+<th>はめる文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ハッカー・侵入者</td>
+<td><strong>Computer Crimes Act 1997</strong></td>
+<td>"Accessing the server without permission is <strong>unauthorised access under section 3</strong>."</td>
+</tr>
+<tr>
+<td>ネットで悪質な投稿・偽動画</td>
+<td><strong>CMA 1998 s233</strong>／Defamation Act 1957</td>
+<td>"Posting false or offensive content is an offence under <strong>section 233</strong>."</td>
+</tr>
+<tr>
+<td>コピーした会社・人</td>
+<td><strong>Copyright Act 1987 s36</strong></td>
+<td>"Copying the work without permission is <strong>infringement</strong>."</td>
+</tr>
+<tr>
+<td>データを守れなかった・無断利用した組織</td>
+<td><strong>PDPA 2010</strong></td>
+<td>"The company breached the <strong>Security Principle</strong> and must <strong>notify the Commissioner</strong>."</td>
+</tr>
+</tbody>
+</table>
+<p><strong>対策の枠</strong></p>
+<blockquote>
+<p>"To prevent this, ［組織］ should ［対策］. This would ［効果］ while still allowing ［組織］ to benefit from innovation."</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>対策の部品</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>法的</td>
+<td>obtain <strong>clear consent</strong>／follow <strong>PDPA</strong>／clear policies／report breaches</td>
+</tr>
+<tr>
+<td>技術的</td>
+<td><strong>encryption</strong>／<strong>multi-factor authentication</strong>／firewalls／regular testing</td>
+</tr>
+<tr>
+<td>人</td>
+<td><strong>staff training</strong>／<strong>human review</strong> of AI decisions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="eshould-be-regulated-is-it-justified">型E：賛否を論じる（"should … be regulated / is it justified"）</h3>
+<p><strong>手順</strong>：賛成（功利主義）→ 反対（権利）→ 条件つきの結論</p>
+<blockquote>
+<p>"<strong>On the one hand</strong>, ［技術］ brings benefits such as ［利点］. From a <strong>utilitarian</strong> view, this creates the greatest good for the greatest number."<br />
+"<strong>On the other hand</strong>, it threatens ［誰］'s right to ［privacy / safety / fair treatment］. From a <strong>natural rights</strong> view, ［それは守られるべき］."<br />
+"<strong>Therefore</strong>, ［技術］ is justified <strong>only if</strong> ［consent / transparency / safeguards / regulation］. Regulation is necessary, but it should be <strong>proportionate</strong> so that it does not stop innovation."</p>
+</blockquote>
+<hr />
+</section><section class="sec recallable"><h2 id="_5">📖 答案で使う英単語帳</h2>
+<blockquote>
+<p>日本語 → 英語。暗記モードで英語が隠れるので、言えるか試してください。<strong>赤い印＝必須</strong>。</p>
+</blockquote>
+<h3 id="_6">答案の型・つなぎ</h3>
+<table>
+<thead>
+<tr>
+<th>日本語</th>
+<th>英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>利害関係者</td>
+<td><mark><strong>stakeholders</strong></mark></td>
+</tr>
+<tr>
+<td>対立する権利</td>
+<td><mark><strong>competing rights / competing interests</strong></mark></td>
+</tr>
+<tr>
+<td>〜と〜のバランスを取る</td>
+<td><mark><strong>balance A and B</strong></mark> / strike a balance between A and B</td>
+</tr>
+<tr>
+<td>正当化できる</td>
+<td><strong>justified</strong> / justifiable</td>
+</tr>
+<tr>
+<td>〜という条件なら</td>
+<td><strong>only if</strong> … / provided that …</td>
+</tr>
+<tr>
+<td>第一に・さらに・しかし・例えば・したがって・結論として</td>
+<td>Firstly / Furthermore / However / For example / Therefore / In conclusion</td>
+</tr>
+<tr>
+<td>影響</td>
+<td><strong>impact / consequences / implications</strong></td>
+</tr>
+<tr>
+<td>責任</td>
+<td><strong>responsibility</strong> / accountability（説明責任）</td>
+</tr>
+<tr>
+<td>提案する</td>
+<td><strong>recommend</strong> / suggest</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">倫理</h3>
+<table>
+<thead>
+<tr>
+<th>日本語</th>
+<th>英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>倫理的な</td>
+<td><mark><strong>ethical</strong></mark>（反対：unethical）</td>
+</tr>
+<tr>
+<td>倫理違反</td>
+<td><strong>ethical breach</strong></td>
+</tr>
+<tr>
+<td>義務</td>
+<td><strong>duty</strong> / obligation</td>
+</tr>
+<tr>
+<td>害を与える</td>
+<td><mark><strong>cause harm</strong></mark></td>
+</tr>
+<tr>
+<td>正直・透明性</td>
+<td><strong>honesty / transparency</strong></td>
+</tr>
+<tr>
+<td>だます・誤解させる</td>
+<td><strong>deceive / mislead</strong></td>
+</tr>
+<tr>
+<td>自己決定・自主性</td>
+<td><strong>autonomy</strong></td>
+</tr>
+<tr>
+<td>尊厳</td>
+<td><strong>dignity</strong></td>
+</tr>
+<tr>
+<td>差別</td>
+<td><strong>discrimination</strong></td>
+</tr>
+<tr>
+<td>公平・包摂</td>
+<td><strong>fairness / inclusion</strong></td>
+</tr>
+<tr>
+<td>社会の利益・公共の利益</td>
+<td><strong>public good / public interest</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip">IP（知的財産）</h3>
+<table>
+<thead>
+<tr>
+<th>日本語</th>
+<th>英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知的財産</td>
+<td><mark><strong>intellectual property (IP)</strong></mark></td>
+</tr>
+<tr>
+<td>侵害</td>
+<td><mark><strong>infringement</strong></mark>（侵害する：infringe）</td>
+</tr>
+<tr>
+<td>著作権者</td>
+<td><strong>copyright owner</strong></td>
+</tr>
+<tr>
+<td>許可なく</td>
+<td><mark><strong>without permission / without a licence</strong></mark></td>
+</tr>
+<tr>
+<td>複製</td>
+<td><strong>reproduction</strong> / copy</td>
+</tr>
+<tr>
+<td>登録する</td>
+<td><mark><strong>register</strong></mark>（with MyIPO）</td>
+</tr>
+<tr>
+<td>混同</td>
+<td><mark><strong>confusion</strong></mark>（likely to confuse consumers）</td>
+</tr>
+<tr>
+<td>独自の・オリジナルの</td>
+<td><strong>original</strong></td>
+</tr>
+<tr>
+<td>発明</td>
+<td><strong>invention</strong></td>
+</tr>
+<tr>
+<td>差止命令</td>
+<td><mark><strong>injunction</strong></mark></td>
+</tr>
+<tr>
+<td>損害賠償</td>
+<td><mark><strong>damages</strong></mark></td>
+</tr>
+<tr>
+<td>利益の吐き出し</td>
+<td><mark><strong>account of profits</strong></mark></td>
+</tr>
+<tr>
+<td>和解</td>
+<td><strong>settlement</strong>（out-of-court settlement）</td>
+</tr>
+<tr>
+<td>盗作</td>
+<td><strong>plagiarism</strong></td>
+</tr>
+<tr>
+<td>革新・イノベーション</td>
+<td><mark><strong>innovation</strong></mark></td>
+</tr>
+<tr>
+<td>創造性</td>
+<td><strong>creativity</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">プライバシー・セキュリティ</h3>
+<table>
+<thead>
+<tr>
+<th>日本語</th>
+<th>英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>個人データ</td>
+<td><mark><strong>personal data</strong></mark></td>
+</tr>
+<tr>
+<td>同意</td>
+<td><mark><strong>consent</strong></mark>（informed consent＝十分に説明された同意）</td>
+</tr>
+<tr>
+<td>監視</td>
+<td><mark><strong>surveillance / monitoring</strong></mark></td>
+</tr>
+<tr>
+<td>生体データ</td>
+<td><strong>biometric data</strong></td>
+</tr>
+<tr>
+<td>データ漏洩</td>
+<td><mark><strong>data breach</strong></mark></td>
+</tr>
+<tr>
+<td>なりすまし</td>
+<td><strong>identity theft</strong></td>
+</tr>
+<tr>
+<td>不正アクセス</td>
+<td><mark><strong>unauthorised access</strong></mark></td>
+</tr>
+<tr>
+<td>暗号化</td>
+<td><strong>encryption</strong></td>
+</tr>
+<tr>
+<td>多要素認証</td>
+<td><strong>multi-factor authentication (MFA)</strong></td>
+</tr>
+<tr>
+<td>脆弱性・弱点</td>
+<td><strong>vulnerability</strong> / flaw</td>
+</tr>
+<tr>
+<td>当局・規制機関</td>
+<td><strong>regulators / authorities</strong></td>
+</tr>
+<tr>
+<td>法令遵守</td>
+<td><strong>compliance</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">社会問題</h3>
+<table>
+<thead>
+<tr>
+<th>日本語</th>
+<th>英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>失業</td>
+<td><strong>unemployment / job displacement</strong></td>
+</tr>
+<tr>
+<td>依存</td>
+<td><strong>addiction</strong></td>
+</tr>
+<tr>
+<td>偽情報</td>
+<td><strong>misinformation / fake news</strong></td>
+</tr>
+<tr>
+<td>名誉毀損</td>
+<td><strong>defamation</strong></td>
+</tr>
+<tr>
+<td>評判</td>
+<td><mark><strong>reputation</strong></mark>（reputational damage＝評判の悪化）</td>
+</tr>
+<tr>
+<td>信頼</td>
+<td><mark><strong>trust</strong></mark>（loss of trust＝信頼の喪失）</td>
+</tr>
+<tr>
+<td>表現の自由</td>
+<td><mark><strong>freedom of speech / expression</strong></mark></td>
+</tr>
+<tr>
+<td>規制</td>
+<td><mark><strong>regulation</strong></mark>（regulate＝規制する）</td>
+</tr>
+<tr>
+<td>情報格差</td>
+<td><strong>digital divide</strong></td>
+</tr>
+<tr>
+<td>弱い立場の人</td>
+<td><strong>vulnerable groups</strong>（children, disabled people）</td>
+</tr>
+<tr>
+<td>アクセシビリティ</td>
+<td><strong>accessibility</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section><section class="sec recallable"><h2 id="1_1">1. 試験の型と採点ポイント</h2>
+<h3 id="_10">🎯 講師が録画で言ったこと（最重要）</h3>
+<ul>
+<li>試験は <strong>2大テーマ：① IP ② Ethics（ACM Code ＋ 倫理理論 Deontology / Utilitarianism / Natural Rights）</strong></li>
+<li><mark><strong>IP は copyright・trademark・patent の3つに集中。industrial design は出ない。</strong></mark> trade secret は講義のみ（ただし Revision 1 の満点答案には trade secret も入っていた → 補足として書くのはOK）</li>
+<li>理論の覚え方：<strong>Deontology = morality（義務）／Utilitarianism = greater good（"utility"＝病院・学校・道路などの公共財と覚える）／Natural rights = respect for individuality（個人の権利）</strong></li>
+<li><mark><strong>10点 ≒ 3ポイント＋elaboration。15点 ≒ 5〜6ポイント。各ポイント＝ definition ＋ explanation ＋ example（シナリオに即した例）</strong></mark> → これで満点</li>
+<li>シナリオ中の「手がかり語」に線を引く（例：<em>six months after launch</em> → 先に出した方が権利者／<em>identical features, colour scheme, slogan</em> → trademark・copyright）</li>
+<li>ACM は番号を覚えなくてOK。<strong>原則名を3〜4個</strong>覚えて説明できれば十分</li>
+<li>ACM の大枠は <strong>"Avoid harm" と "Contribute to society"</strong></li>
+<li><mark><strong>書くときは箇条書きではなく文章（sentences）で。</strong></mark> "Define, explain, apply (example from the scenario)"</li>
+<li>書きすぎ注意：5点問題に長文は無駄。15点問題に2ポイントだけだと点のあげようがない → <strong>配点に比例してポイント数を決める</strong></li>
+<li>例はシナリオから作ってOK（"whatever is reasonable will be accepted"）。脆弱性の中身など書かれていなければ自分で具体化（例：password leak, backdoor）すると加点</li>
+<li>利害関係者は <strong>最低2者（必須）＋α（他の従業員・政府など）で加点</strong>。視点：consumer／business／government／individual、underserved communities、children、privacy、profit</li>
+<li>採点基準（marking scheme）はキーワードのみ。範囲内で関連していれば自由な答えも認められる</li>
+</ul>
+<h3 id="areastxt">出題エリア（areas.txt より・講師指定）</h3>
+<ol>
+<li><strong>Social, Legal &amp; Ethical implications of technology</strong>（技術の社会・法・倫理的影響）</li>
+<li><strong>IP Protection &amp; claims/remedies for infringement</strong>（IPの保護と侵害時の救済）</li>
+<li><strong>ACM Code (applied to scenario)</strong>（ACM倫理綱領をシナリオに適用）</li>
+<li><strong>IP, Ethics and Innovation</strong>（IP・倫理・イノベーション）</li>
+</ol>
+<h3 id="_11">⚠ 最重要ルール（講師指定）</h3>
+<blockquote>
+<p><strong>For each question, cover at least 2 competing rights.</strong><br />
+例: user/gamer vs company／government vs commercial interest／public disclosure vs individual rights (privacy)</p>
+</blockquote>
+<p>→ <mark><strong>どの問題でも「AさんのX権 vs BさんのY権」を最低2組書く。</strong></mark> これを書かないと減点。</p>
+<h3 id="_12">試験形式（録画で確定）</h3>
+<ul>
+<li><mark><strong>4問・全問必答・2時間（1問 約30分）＋読む時間 10〜15分</strong></mark>。Moodle上で <strong>Safe Exam Browser（SEB）</strong></li>
+<li>各問は小問に分割：<strong>10＋15</strong> または <strong>5＋20</strong>、<strong>5＋10＋10</strong> など（合計25点）</li>
+<li>全問 <strong>シナリオ型</strong>（ゲーム／AR・VR／学生／AI など）→ シナリオに当てはめて書く</li>
+<li>(a) 10点 = <strong>Describe / Identify / Explain</strong>（3ポイント＋elaboration）</li>
+<li>(b) 15点 = <strong>Discuss / Evaluate / Recommend</strong>（両面＋利害関係者＋結論。5〜6ポイント）</li>
+<li>出題パターン（講師談）："What are the <strong>social and legal / economic impacts</strong>…"／"What should the person do?"／"<strong>I am an IP owner and my IP right is violated – what is your recommendation?</strong>"（→ IPの種類＋救済）</li>
+<li>※ Kahoot形式の選択問題は復習用。本番は記述式（§4は概念確認用）</li>
+</ul>
+<h3 id="_13">万能答案テンプレ（この順番で書けば形になる）</h3>
+<p>どの問題も、次の5ステップで書きます。日本語で「何を書くか」を理解して、右の英語フレーズをそのまま使ってください。</p>
+<table>
+<thead>
+<tr>
+<th>順番</th>
+<th>何を書く？（日本語）</th>
+<th>そのまま使える英語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 導入（1〜2行）</td>
+<td>キーワードを定義して、何を論じるか宣言する</td>
+<td>"Deepfakes are AI-generated videos that falsely show a person saying or doing things. This answer discusses the ethical and social issues involved."</td>
+</tr>
+<tr>
+<td>② 本文（ポイント×3〜6）</td>
+<td>各ポイント＝<strong>主張 → 説明 → シナリオの例 → 根拠（法律・ACM・理論）</strong></td>
+<td>"Firstly, privacy is a major concern. In this scenario, users' eye movements are collected without informed consent. This breaches ACM 1.6 Respect privacy and the PDPA 2010."</td>
+</tr>
+<tr>
+<td>③ 対立する権利（必須）</td>
+<td>「AさんのXの権利 vs BさんのYの権利」を<strong>最低2組</strong></td>
+<td>"There are competing rights between users' right to privacy and the company's commercial interest."</td>
+</tr>
+<tr>
+<td>④ 利害関係者</td>
+<td>誰が得して誰が損するか（ユーザー・会社・クリエイター・政府・社会）</td>
+<td>"The stakeholders affected include users, the company and regulators."</td>
+</tr>
+<tr>
+<td>⑤ 結論</td>
+<td>「〜という条件なら正当化できる」とバランスを取ってまとめる</td>
+<td>"On balance, the technology is justified only if users give informed consent and data is protected. A balance between innovation and individual rights is needed."</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>つなぎの言葉</strong>（文章で書くときに便利）：Firstly / Secondly / Furthermore / However / On the other hand / For example / Therefore / In conclusion</p>
+</blockquote>
+<h3 id="_14">使える「根拠」の弾（どの問題にも使える）</h3>
+<table>
+<thead>
+<tr>
+<th>根拠</th>
+<th>日本語でざっくり</th>
+<th>答案での使い方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Deontology（義務論）</strong> Kant</td>
+<td>「結果がどうであれ、やってはいけないことはダメ」。嘘・隠蔽・人を道具扱いは×（duty, absolute rules）</td>
+<td>隠す・ごまかす・無断使用の問題で「義務違反」と言う</td>
+</tr>
+<tr>
+<td><strong>Utilitarianism（功利主義）</strong> Bentham</td>
+<td>「一番多くの人が一番幸せになる選択が正しい」（greatest good for the greatest number）。結果で判断</td>
+<td>メリットとデメリットを比べるときに使う</td>
+</tr>
+<tr>
+<td><strong>Natural Rights（自然権）</strong> Locke</td>
+<td>「人には生まれつき自由・財産・プライバシーの権利がある」（autonomy, liberty, property）</td>
+<td>プライバシー・同意・自分の作品の権利の問題で使う</td>
+</tr>
+<tr>
+<td><strong>ACM 1.1〜1.7</strong></td>
+<td>コンピュータ専門家の倫理ルール</td>
+<td>§2.1 の表</td>
+</tr>
+<tr>
+<td><strong>法律</strong></td>
+<td>PDPA 2010（個人情報）、Copyright Act 1987（著作権）、Trademarks Act 2019（商標）、Patents Act 1983（特許）、Computer Crimes Act 1997（サイバー犯罪）、CMA 1998 s233（ネット上の不適切な発信）、Defamation Act 1957（名誉毀損）、憲法 Art 10（言論の自由）、GDPR（EUの個人情報法）</td>
+<td>「〜法の〜に違反する」と書くと説得力が上がる</td>
+</tr>
+<tr>
+<td><strong>権利の調整の方法</strong></td>
+<td>対立する権利は「laws（法律）・regulations（規制）・code of ethics（倫理綱領）」で調整する（スライド1）</td>
+<td>結論で「法律と倫理綱領でバランスを取るべき」と書ける</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section><section class="sec recallable"><h2 id="2">2. 知識チートシート</h2>
+<h3 id="21-acm-code-of-ethics-1117">2.1 ACM Code of Ethics（倫理原則 1.1〜1.7）★最頻出</h3>
+<p>ACM（Association for Computing Machinery）＝コンピュータ専門家の国際団体。その倫理綱領を「シナリオに当てはめる」問題が必ず出ます。<strong>番号は覚えなくてOK、英語の原則名と意味を3〜4個言えれば十分</strong>（講師談）。</p>
+<table>
+<thead>
+<tr>
+<th>番号</th>
+<th>原則（英語・そのまま書く）</th>
+<th>日本語の意味</th>
+<th>こういう場面で使う</th>
+<th>対応理論</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1.1</strong></td>
+<td><mark>Contribute to society and to human well-being</mark></td>
+<td>社会と人々の幸せに貢献する</td>
+<td>技術が人の安全・生活の質を良くするか（悪くするか）</td>
+<td>功利主義・自然権</td>
+</tr>
+<tr>
+<td><strong>1.2</strong></td>
+<td><mark>Avoid harm</mark></td>
+<td>害を与えない（危険を予測して減らし、報告する）</td>
+<td>データ漏洩・金銭被害・心の傷・健康被害</td>
+<td>義務論</td>
+</tr>
+<tr>
+<td><strong>1.3</strong></td>
+<td><mark>Be honest and trustworthy</mark></td>
+<td>正直で信頼できる（嘘をつかない、隠さない）</td>
+<td>AI使用を隠す・欠陥を隠す・ユーザーを欺く</td>
+<td>義務論</td>
+</tr>
+<tr>
+<td><strong>1.4</strong></td>
+<td>Be fair and take action not to discriminate</td>
+<td>公平で差別しない</td>
+<td>障害者が使えない（アクセシビリティ）・AIの偏見</td>
+<td>義務論・自然権</td>
+</tr>
+<tr>
+<td><strong>1.5</strong></td>
+<td><mark>Respect the work required to produce new ideas, inventions, creative works</mark></td>
+<td>他人の創作・発明への敬意（盗用しない）</td>
+<td>著作権侵害・盗作・AIが作品を無断学習</td>
+<td>自然権・法</td>
+</tr>
+<tr>
+<td><strong>1.6</strong></td>
+<td><mark>Respect privacy</mark></td>
+<td>プライバシーを尊重（同意を取る、必要最小限だけ集める）</td>
+<td>個人データ・生体データの収集・共有</td>
+<td>3つ全部</td>
+</tr>
+<tr>
+<td><strong>1.7</strong></td>
+<td>Honor confidentiality</td>
+<td>秘密を守る</td>
+<td>会社の機密・顧客情報・前職の情報を漏らす</td>
+<td>3つ全部</td>
+</tr>
+</tbody>
+</table>
+<p>使えると加点（専門家としての責任）：</p>
+<ul>
+<li><strong>2.1</strong> Strive to achieve high quality — 高品質な仕事をする（チェックせずに出すのは×）</li>
+<li><strong>2.2</strong> Maintain professional competence — 専門的な能力を保つ（AI任せで確認しないのは×）</li>
+<li><strong>2.3</strong> Know and respect existing rules — 法律やルールを知って守る</li>
+<li><strong>2.5</strong> Give thorough evaluations… including analysis of possible risks — リスクをきちんと評価する</li>
+<li><strong>2.7</strong> Foster public awareness of computing — 技術について社会の理解を広める</li>
+<li><strong>2.9</strong> Design systems that are robustly and usably secure — 安全なシステムを作る</li>
+<li><strong>3.1</strong> Ensure that the public good is the central concern — 公共の利益を最優先する</li>
+</ul>
+<h3 id="22-ip-copyright-patent-trademark-3">2.2 IP の種類（マレーシア）— 表で暗記 ★試験は Copyright / Patent / Trademark の3つ</h3>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>法律</th>
+<th>何を守る</th>
+<th>期間</th>
+<th>登録</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><mark><strong>Copyright</strong></mark></td>
+<td>Copyright Act 1987</td>
+<td>表現（idea ではない）：literary（<strong>computer programs含む</strong>）, musical, artistic, films, sound recordings, broadcasts, derivative works</td>
+<td><strong>作者の生涯＋50年</strong>／film・録音・broadcast は50年</td>
+<td><strong>不要（自動）</strong>。Voluntary Notification は証拠用</td>
+</tr>
+<tr>
+<td><mark><strong>Patent</strong></mark></td>
+<td>Patents Act 1983</td>
+<td>発明（product or process）。新規性・進歩性・産業上利用可能性</td>
+<td><strong>20年</strong>（出願日から）／Utility Innovation <strong>10年</strong></td>
+<td>必要</td>
+</tr>
+<tr>
+<td><mark><strong>Trademark</strong></mark></td>
+<td><strong>Trademarks Act 2019</strong></td>
+<td>出所を区別する sign（言葉・ロゴ・<strong>色・音・匂い・ホログラム・動き</strong>）</td>
+<td><strong>10年、10年毎に無限更新</strong>（s41）</td>
+<td>登録推奨。未登録は <strong>passing off</strong>（s82(2), goodwill）</td>
+</tr>
+<tr>
+<td><del>Industrial Design</del>（<strong>試験に出ない</strong>）</td>
+<td>Industrial Designs Act 1996</td>
+<td>形状・模様（見た目、appeal to the eye）</td>
+<td>5年＋5×4＝<strong>最大25年</strong></td>
+<td>必要</td>
+</tr>
+<tr>
+<td><strong>Trade Secret / Confidential Info</strong></td>
+<td>法律なし（<strong>equity/case law, contract, tort</strong>）</td>
+<td>ノウハウ・レシピ・アルゴリズム・顧客リスト</td>
+<td>秘密である限り無期限</td>
+<td>不要</td>
+</tr>
+<tr>
+<td><strong>Geographical Indication</strong></td>
+<td>GI Act 2000</td>
+<td>産地由来の品質（例：Sarawak pepper）</td>
+<td>10年、更新可</td>
+<td>必要</td>
+</tr>
+<tr>
+<td><strong>Layout-Design of IC</strong></td>
+<td>Layout-Design of IC Act 2000</td>
+<td>集積回路の3D配置。original＋fixed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>管轄：<strong>MyIPO</strong>（国内, IP Corporation of Malaysia Act 2002）／<strong>WIPO</strong>（国際）</li>
+<li>2分類：<strong>Artistic property = copyright</strong>／<strong>Industrial property = trademark, patent, design</strong></li>
+<li>マレーシアには <strong>IP Court（2007年7月17日〜）</strong> と <strong>Copyright Tribunal</strong> がある</li>
+</ul>
+<h3 id="23">2.3 国際条約</h3>
+<table>
+<thead>
+<tr>
+<th>条約</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Paris Convention 1883</strong></td>
+<td>工業所有権。<strong>national treatment</strong>、<strong>priority right</strong>（特許12ヶ月／意匠・商標6ヶ月）</td>
+</tr>
+<tr>
+<td><strong>Berne Convention 1886</strong></td>
+<td>著作権。national treatment、<strong>automatic protection</strong>（fixed された瞬間）、最低50年</td>
+</tr>
+<tr>
+<td><strong>TRIPS 1994</strong>（WTO）</td>
+<td>Paris・Berneに上乗せ。minimum standards、<strong>most favoured nation</strong>、strong enforcement</td>
+</tr>
+<tr>
+<td><strong>WIPO Copyright Treaty 1996</strong></td>
+<td>デジタル環境。computer programs &amp; databases を保護。<strong>技術的保護手段の回避（circumvention）に対する救済</strong></td>
+</tr>
+<tr>
+<td><strong>PCT 1970</strong></td>
+<td>特許の国際出願を簡単に</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-copyright">2.4 Copyright 詳細</h3>
+<ul>
+<li><mark><strong>Idea は保護されない、expression を保護</strong></mark>。独立に似たものを作っても侵害ではない（copying が要件）</li>
+<li>保護要件（3つ）：① <strong>original</strong>（自分で作り、十分な effort）② <strong>material form</strong>（固定、見えなくてもよい storage 含む）③ <strong>qualified person</strong>（市民・永住者）<strong>or 初出版がマレーシア</strong>（他国出版後30日以内も可）</li>
+<li>所有：原則<strong>作者</strong>。政府系は政府。<strong>委託・雇用中の作品 → 委託者／雇用主</strong>（契約がなければ）。譲渡（assignment）は<strong>書面必須</strong>（s27(3)）</li>
+<li>権利：<strong>Legal</strong>（訴える権利）／<strong>Economic</strong>（複製・公衆送信・上演・頒布・貸与 s13(1)）／<strong>Moral</strong>（<strong>paternity</strong>＝作者表示、<strong>integrity</strong>＝改変されない）</li>
+<li>侵害（<strong>s36</strong>）：許可なく複製・公衆送信・頒布・輸入・販売・所持（私的除く）…</li>
+<li>例外 <strong>fair dealing</strong>：non-profit research, private study, criticism, review, reporting current events（acknowledgement 必要）, parody, 学校での非営利上演, プログラムのバックアップ</li>
+<li>救済（<strong>s37</strong>）：<strong><mark>injunction, damages, account of profits</mark>, statutory damages（1作品 RM25k以下、合計 RM500k以下）, other orders</strong></li>
+<li>判例：Sheikh Abdullah v Universal Music [2017]（契約当事者にしか royalty 請求不可）／Taylor Swift v Big Machine（masters の所有）／Ariana Grande（パパラッチ写真を自分のIGに→著作権はカメラマン、和解）／Blurred Lines v Marvin Gaye／Kernel v Mosley（ネット公開＝米国作品扱い）／Eiffel Tower の照明は別の著作物</li>
+</ul>
+<h3 id="25-patent">2.5 Patent 詳細</h3>
+<ul>
+<li>定義：invention = <strong>"idea of inventor which permits solution to specific problem in the field of technology"</strong>（s12）、product or process</li>
+<li>要件（<strong>s11</strong>）：<mark><strong>new（novelty）／inventive step（non-obvious to a person skilled in the field）／industrially applicable</strong></mark>。1つでも欠けたら無効→侵害なし</li>
+<li><strong>除外</strong>：discovery, scientific theory, mathematical method／artistic works／scheme, rule, method of doing business, playing game, <strong>computer programs</strong>／presentation of information／手術・治療方法</li>
+<li>判例：Rolls Royce（飛行方法×）、Organon（薬はOK、飲み方の説明×）、Cobianchi（カードゲームのルール×）</li>
+<li>趣旨：<strong>monopoly in exchange for public disclosure</strong> → 最終的に社会の利益</li>
+<li>救済：<strong>damages, injunction, account of profits</strong>／抗弁：<strong>private, non-commercial use</strong></li>
+<li>判例：Amazon v Barnes &amp; Noble（1-click、和解）／<strong>Apple v Samsung</strong>（pinch-to-zoom 等、$1B超→一部特許取消）</li>
+<li>議論：patent は <strong>sword（他者排除）か shield（防御）か</strong></li>
+</ul>
+<h3 id="26-trademark">2.6 Trademark 詳細</h3>
+<ul>
+<li>定義：<mark><strong>a sign which distinguishes the goods/services of one trader from those of another</strong></mark></li>
+<li>登録不可：<strong>混同を招く・違法</strong>／<strong>scandalous/offensive</strong>／<strong>国益・安全に反する</strong>／<strong>周知商標と同一・類似</strong></li>
+<li>侵害：登録範囲内の商品・サービスについて <strong>identical or confusingly similar mark</strong> を無断使用</li>
+<li>救済：<strong>permanent injunction／delivery up（侵害品の引渡し・廃棄）／damages／account of profits／declaration</strong></li>
+<li>未登録：<mark><strong>passing off</strong></mark>（goodwill を保護）</li>
+<li>判例：<strong>McDonald's v McCurry (2009, Malaysia, Federal Court)</strong> → McCurry 勝訴（"Mc" 接頭辞を独占できない・顧客層/外観が違い混同なし）／Louis Vuitton v Louis Vuiton Dak（韓国、フライドチキン店→LV勝訴）／Adidas v Shoe Branding（EU、3本線 vs 2本線。2019年に adidas の3本線商標は識別性不足で無効）／<strong>New Balance v Bailun（中国、9800万元→500万元）</strong>／<strong>Katy Perry v Katie Perry（2023、豪州、Katie勝訴）</strong></li>
+<li><strong>ドメイン名紛争</strong>：</li>
+<li><strong>Cybersquatting</strong>（商標をドメイン登録して売りつける）：Panavision v Toeppen／<strong>Google v Jing Ren</strong>（android.co.in, bad faith）／米 Anti-cybersquatting Consumer Protection Act 1999</li>
+<li><strong>Typosquatting</strong>：Paine Webber v wwwpainewebber.com</li>
+<li><strong>Tarnishment</strong>：Jews for Jesus v Brodsky／Hasbro v IEG（candyland.com）</li>
+<li><strong>競合のドメイン登録</strong>：Princeton Review v Kaplan</li>
+<li><strong>Meta tags</strong>：Playboy v AsiaFocus／<strong>Keywords</strong>：Playboy v Excite（侵害）、<strong>Google v Louis Vuitton（2010 ECJ：検索エンジンは侵害しない）</strong></li>
+<li>マレーシア：<strong>Genting v Tan Kim Sin</strong>（業種が違う→非侵害）。明文規定なし、<strong>s38</strong> を拡張適用可。ICANN／MYNIC／<strong>WIPO Arbitration and Mediation Center</strong></li>
+<li>BMW（ベトナム）：ドメイン取消・弁護士費用・公開謝罪は認容、損害賠償は証拠不足で棄却</li>
+</ul>
+<h3 id="27-trade-secret-confidential-information">2.7 Trade Secret / Confidential Information（試験では補足扱い・軽く）</h3>
+<ul>
+<li>起源：Morison v Moat (1851)（秘伝薬）、<strong>Prince Albert v Strange (1849)</strong>（契約関係なくても保護）</li>
+<li>根拠：<strong>equity（衡平法）・判例</strong>（成文法ではない）。copyright/patent を早期段階で補完</li>
+<li><strong>3要件（Coco v AN Clark (1969), Megarry J）</strong>：</li>
+<li>information has the <strong>necessary quality of confidence</strong>（公知でない）</li>
+<li>imparted in circumstances importing an <strong>obligation of confidence</strong>（契約・NDA・雇用・fiduciary）</li>
+<li><strong>unauthorised use</strong> of the information（to the detriment of the owner）</li>
+<li>Thomas Marshall v Guinle (1976)：普通の情報でも秘密になりうる</li>
+<li><strong>Fiduciary duty</strong>：地位が高いほど重い、退職後も続く → <strong>Electro Cad v Mejati (1998)</strong>（取締役が辞めて Stop Card→Stop Car）</li>
+<li><strong>Seager v Copydex (1967)</strong>：無意識の使用でも breach（<strong>intention is irrelevant</strong>）</li>
+<li>救済：<strong>injunction, damages, account of profits</strong></li>
+<li>例：Apple エンジニアの娘が iPhone X 動画投稿→解雇</li>
+</ul>
+<h3 id="28-privacy-pdpa-20102013-gdpr">2.8 Privacy — PDPA 2010（2013施行）&amp; GDPR</h3>
+<ul>
+<li>対象：<strong>commercial transactions</strong> の個人データ。<strong>政府は対象外</strong></li>
+<li>用語：<strong>Data User</strong>（管理者）／<strong>Data Processor</strong>／<strong>Data Subject</strong>（本人）／<strong>Commissioner</strong></li>
+<li><strong>Sensitive personal data</strong>：身体・精神の健康、政治的意見、宗教、犯罪歴</li>
+<li><strong>7原則</strong>（暗記法「<strong>G-N-D-S-R-I-A</strong>」）：<mark><strong>General</strong>（同意）</mark>・<strong>Notice and Choice</strong>・<strong>Disclosure</strong>（目的外開示禁止）・<strong>Security</strong>・<strong>Retention</strong>（必要以上保存しない）・<strong>Data Integrity</strong>（正確）・<strong>Access</strong>（本人の訂正）</li>
+<li>本人の権利：access, correct, <strong>withdraw consent</strong>, object to processing causing damage/distress, object to direct marketing</li>
+<li>越境移転：原則禁止（同意・契約履行は例外）</li>
+<li>違反：<strong>RM500,000以下 or 2年以下 or 両方</strong>（登録なしは 3年）※スライドの数字</li>
+<li>⚠ <strong>PDPA (Amendment) Act 2024</strong>（2025年施行）：スライドは「漏洩報告義務なし」だが<strong>改正で義務化</strong>。講師も録画で「漏洩したら黙っていてはいけない、regulator（Commissioner）に通知」と説明 →</li>
+<li><mark><strong>Data breach notification</strong></mark>：Commissioner へ速やかに（ガイドライン上 <strong>72時間以内</strong>）、重大な害があれば本人にも通知</li>
+<li><strong>Data Protection Officer (DPO)</strong> の選任義務</li>
+<li><strong>Data portability</strong> の権利、Data processor にも Security 義務、<strong>biometric data</strong> が sensitive data に</li>
+<li>罰金上限 <strong>RM1,000,000 / 3年</strong> に引き上げ</li>
+<li>答案では "Under the PDPA 2010 (as amended in 2024), the company must notify the Commissioner of the breach and inform affected customers" と書けばOK</li>
+<li>限界：政府データ、海外プロバイダ（Google等）、非営利団体、CTOS/CCRIS、個人保有</li>
+<li><strong>GDPR（2018）</strong>：EU市民のデータを扱えば世界中に適用。原則：<strong>lawfulness/fairness/transparency, purpose limitation, data minimisation, accuracy, storage limitation, integrity &amp; confidentiality, accountability</strong>。権利：informed, access, rectification, <strong>erasure（right to be forgotten）</strong>, restrict, <strong>portability</strong>, object, <strong>automated decision-making/profiling</strong>。<strong>漏洩は72時間以内に通知</strong>。biometric data も個人データ</li>
+<li>Right to be forgotten：<strong>Google Spain v Costeja Gonzalez (2014)</strong>／Google v CNIL (2019)（EU域内のみ）</li>
+</ul>
+<h3 id="29-freedom-of-speech">2.9 Freedom of Speech</h3>
+<ul>
+<li>US：<strong>First Amendment</strong>／UK：<strong>Human Rights Act 1998</strong>・<strong>ECHR Art 10</strong>（freedom of expression）</li>
+<li>Malaysia：<mark><strong>Federal Constitution Art 10(1)(a)</strong></mark>（市民の言論の自由）だが <strong>Art 10(2)</strong> で制限可（security, public order, morality, defamation, contempt of court, incitement）</li>
+<li>規制：<strong>CMA 1998 s233</strong>（obscene, indecent, <strong>false</strong>, menacing, offensive な通信で困らせる意図→<strong>RM50,000以下 or 1年以下</strong>＋継続1日 RM1,000）</li>
+<li>Nik Adib v PP [2017]（1週間＋RM3,000）／<strong>Fahmi Reza v PP [2020]</strong>（RM10,000）</li>
+<li><strong>Defamation</strong>：民事 Defamation Act 1957／刑事 Penal Code s499–502</li>
+<li><strong>Libel</strong>（永続的：書籍・メール・画像）／<strong>Slander</strong>（一時的：口頭）</li>
+<li>要件：statement ／ false ／ refers to the claimant ／ <strong>published to a third party</strong></li>
+<li>抗弁：<strong>truth, fair comment on public interest, absolute privilege</strong></li>
+<li>民事＝賠償、刑事＝最大2年 or 罰金</li>
+<li>Twitter事件：R Nadeswaran／<strong>Fahmi Fadzil（Twitterで100回謝罪）</strong></li>
+<li>論点：offensive speech、Miller v California（obscenity 3要件）、<strong>protection of children</strong>（Child Act 2001, filtering, parental control）、<strong>anonymity</strong>（whistleblower・被害者 vs 犯罪利用）、spam、hate speech、<strong>fake news &amp; deepfakes</strong>、cyberbullying</li>
+</ul>
+<h3 id="210-computer-crimes-act-1997cca">2.10 Computer Crimes Act 1997（CCA）★条文と罰則を暗記</h3>
+<table>
+<thead>
+<tr>
+<th>条文</th>
+<th>内容</th>
+<th>罰則</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>s3</strong></td>
+<td><mark><strong>Unauthorised access</strong></mark>（意図してアクセス＋無許可と知っている）</td>
+<td>RM50,000 / 5年</td>
+</tr>
+<tr>
+<td><strong>s4</strong></td>
+<td>s3 ＋ <strong>さらなる犯罪（詐欺・不正・傷害）の意図</strong></td>
+<td>RM150,000 / 10年</td>
+</tr>
+<tr>
+<td><strong>s5</strong></td>
+<td><strong>Unauthorised modification</strong>（ウイルス導入など）</td>
+<td>RM100,000 / 7年（傷害意図なら RM150,000 / 10年）</td>
+</tr>
+<tr>
+<td><strong>s6</strong></td>
+<td><strong>Wrongful communication</strong>（パスワード等を無権限者に伝える）</td>
+<td>RM25,000 / 3年</td>
+</tr>
+<tr>
+<td>s9(1)</td>
+<td>国外犯も処罰（extra-territorial）</td>
+<td></td>
+</tr>
+<tr>
+<td>s10</td>
+<td>捜索押収は令状（例外あり）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>刑事責任の2要素：<strong>Actus reus</strong>（行為：コンピュータに機能を実行させる、遠隔でも可）＋<strong>Mens rea</strong>（悪意：アクセス意図＋無許可の認識）</li>
+<li>分類：<mark><strong>computer as tool/weapon</strong></mark>（詐欺、IP侵害、クレカ詐欺、サイバーテロ）／<strong>computer as target</strong>（hacking, virus, DoS）</li>
+<li>判例：PP v Vishnu Devarajan [2016]（s3、手続ミスで取下げ）／<strong>Rose Hanida v PP (2016)</strong>（s4、上司のID使用→6年＋RM260,000）／Basheer Ahmad v PP [2016]（s4、事故被害者のカード）／<strong>Kangaie Agilan v PP [2017]</strong>（s5、AirAsia予約システム改変）</li>
+<li>事例：LinkedIn, Yahoo 5億, Facebook, マレーシア通信会社5000万件, Zoom, ILOVEYOU, Colonial Pipeline, SolarWinds, AirAsia breach</li>
+</ul>
+<h3 id="211-social-legal-issuestopic-1">2.11 Social &amp; Legal Issues（Topic 1）</h3>
+<ul>
+<li><strong>Ubiquitous / pervasive computing</strong>：いつでもどこでもコンピュータ</li>
+<li>Benefits：communication, navigation, education, crime fighting, healthcare, automation, e-commerce, free stuff, <strong>tools for disabled people</strong></li>
+<li>Issues：viruses, piracy, spam, <strong>privacy &amp; anonymity</strong>, indecency, libel &amp; hate speech, crimes, impersonal service, <strong>unemployment</strong></li>
+<li><strong>Balancing competing rights: public, commercial &amp; private interests → policed by laws, regulations, code of ethics</strong></li>
+</ul>
+<h3 id="212-ethicstopic-2">2.12 Ethics（Topic 2）</h3>
+<ul>
+<li>Ethics = doing the right thing。前提：rational people &amp; free choices。目標：human dignity, happiness, well-being</li>
+<li>倫理問題は <strong>trade-offs</strong>（アルゴリズム的に解けない）。区別：obligatory/prohibited/acceptable、harm の程度、利益 vs 倫理、個人の好み vs 倫理、<strong>law vs ethics</strong>（合法≠倫理的）</li>
+<li>Law の定義：Salmond（国家が司法で適用する原則）／<strong>Austin（主権者の命令＋制裁）</strong></li>
+<li>専門職の行動：honesty &amp; fairness, confidentiality, competence, know laws, honor contracts, privacy, avoid harm, respect IP</li>
+<li>Trolley problem／自動運転のジレンマ</li>
+</ul>
+<h4 id="activity-1">理論 × シナリオ早見表（Activity 1 より、そのまま使える）</h4>
+<table>
+<thead>
+<tr>
+<th>シナリオ</th>
+<th>Deontology</th>
+<th>Utilitarianism</th>
+<th>Natural Rights</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自動運転タクシー</td>
+<td>安全機能・セキュリティの義務</td>
+<td>公共交通の利益 &gt; 運転手の失業（reskill）</td>
+<td>個人データ保護・選択の自由</td>
+</tr>
+<tr>
+<td>予測型警察</td>
+<td>犯罪前に裁く＝尊厳侵害</td>
+<td>犯罪減少・平和</td>
+<td>推定有罪・前科者への不公平</td>
+</tr>
+<tr>
+<td>職場監視・キーロガー</td>
+<td>労働者への不敬・不信</td>
+<td>生産性↑なら正当、burnout↑なら不当</td>
+<td>打鍵・視線追跡はプライバシー侵害</td>
+</tr>
+<tr>
+<td>公共の顔認証</td>
+<td>悪意のない市民を監視すべきでない</td>
+<td>犯罪抑止のための小さな不便は正当</td>
+<td>自由とプライバシーは奪えない・バイアス</td>
+</tr>
+<tr>
+<td>AIの過信</td>
+<td>AI成果を自分の手柄にするのは不誠実</td>
+<td>生産性↑なら良い、思考力↓なら規制</td>
+<td>違法な生成物の責任の所在</td>
+</tr>
+<tr>
+<td>SNSアルゴリズム</td>
+<td>中毒設計＝人を広告収入として扱う</td>
+<td>娯楽・情報の利益が害を上回れば可</td>
+<td>削除要求・透明性の権利</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section><section class="sec answers recallable"><h2 id="3-revision-14-16">3. Revision 1〜4 全16問 模範解答（日本語解説つき）</h2>
+<p><b>このセクションの読み方</b></p>
+<ul>
+<li>📌 ＝ シナリオの要約（何が起きたか）</li>
+<li>各ポイントは「<strong>日本語の説明</strong>＋（英語キーワード）」。本番では英語キーワードを使って文章にする</li>
+<li>✍ ＝ そのまま答案に使える英語の文</li>
+<li>黄色い枠の 🔁 ＝ <b>対立する権利</b>（講師の指示で毎問必ず書く）</li>
+<li>本番では箇条書きにせず、<strong>文章（sentences）で</strong>書くこと</li>
+</ul>
+<h3 id="revision-1">Revision 1</h3>
+<h4 id="r1-q1-fitness4u-vs-health-vibe">R1-Q1 フィットネスアプリの模倣（Fitness4U vs Health Vibe）★講師が満点答案として解説</h4>
+<p class="scene">📌 <b>状況</b>：Fitness4U が AI フィットネスアプリを出した。半年後、競合の Health Vibe が<strong>同じ機能・同じ配色・同じスローガン</strong>のアプリを出した。Fitness4U は IP 侵害だと主張。</p>
+<h5 id="a-ip-10">(a) どの IP で守れるか説明せよ（10点）</h5>
+<p><b>何を聞いている？</b> アプリとブランドを守る IP の種類。講師いわく「3ポイント＋例」で満点。<br />
+<b>シナリオの手がかり</b>：「six months after launch（半年先に出した）」→ Fitness4U が先の権利者。「colour scheme, slogan（配色・スローガン）」→ 商標。「features（機能）」→ 著作権・特許。</p>
+<ol>
+<li><mark><strong>Trademark（商標）／Trademarks Act 2019</strong></mark><br />
+   商標＝自社の商品・サービスを他社と区別するための目印（ロゴ・名前・<strong>配色・スローガン</strong>も含む）。Fitness4U は <strong>MyIPO（マレーシア知的財産公社）に登録</strong>すべき（10年、更新で無期限）。Health Vibe の似たブランドはユーザーを<strong>混同させる（confusion）</strong>。登録していなくても <strong>passing off（詐称通用：築いた信用＝goodwill を守る訴え）</strong> で戦える。</li>
+<li><mark><strong>Copyright（著作権）／Copyright Act 1987</strong></mark><br />
+   著作権＝創作的な「表現」を守る。登録不要で作った瞬間に自動で発生。アプリでいえば<strong>ソースコード（literary work）、画面デザイン、エクササイズ動画、レシピの写真</strong>など。これらをコピーされたら <strong>s36 の侵害</strong>。ただし「機能やアイデア」自体は守られないので、そっくりコピーでないと証明しにくい。</li>
+<li><mark><strong>Patent（特許）／Patents Act 1983</strong></mark><br />
+   AI で個人別プランを作る仕組みが <strong>新しく（new）・簡単に思いつかず（inventive step）・産業で使える（industrially applicable）</strong> 技術なら特許で20年守れる。ただしソフトウェアそのものは特許の対象外なので、根拠としては弱め。</li>
+<li>（＋α）<strong>Trade secret（営業秘密）</strong><br />
+   AI のアルゴリズム（運動リマインダー・食事プランの仕組みなど）を秘密にしていれば守れる。両社をかけ持ちしているスタッフがいれば、その人にも責任追及できる（講師の補足）。</li>
+</ol>
+<p class="en">✍ "Fitness4U's slogan and colour scheme can be protected as a trademark under the Trademarks Act 2019. If it registers the mark with MyIPO, it can stop Health Vibe from using a confusingly similar brand."</p>
+<h5 id="b-15">(b) 使える法的救済を論じよ（15点）</h5>
+<p><b>何を聞いている？</b> 「訴えたら何が得られるか」。各救済を「<strong>定義＋このケースでの例＋効果</strong>」で書く。</p>
+<ol>
+<li><mark><strong>Injunction（差止命令）</strong></mark>：裁判所が相手に命令すること。2種類ある。</li>
+<li><strong>Prohibitory injunction（禁止的差止）</strong>＝「やめろ」。真似した配色・スローガンの使用を止めさせる</li>
+<li><strong>Mandatory injunction（命令的差止）</strong>＝「直せ」。アプリのデザインを変更・削除させる</li>
+<li>効果：<strong>これ以上の損害と消費者の混乱を防ぐ</strong></li>
+<li><mark><strong>Damages（損害賠償）</strong></mark>＝お金での補償。例：本当は Fitness4U に登録するはずだった10人が、混同して Health Vibe に登録した → その10人分のサブスク料を請求（講師の例）。</li>
+<li><mark><strong>Account of profits（利益の吐き出し）</strong></mark>：Health Vibe が侵害で得た利益を渡させる。<strong>侵害者に得をさせない</strong>。</li>
+<li><strong>Statutory damages（法定損害賠償）</strong>（著作権 s37）：損害額の証明がなくても、<strong>1作品 RM25,000、合計 RM500,000 まで</strong>。</li>
+<li><strong>Delivery up（侵害品の引渡し・廃棄）／Declaration（侵害の宣言）</strong>：商標の救済。</li>
+<li><mark><strong>Negotiation / settlement（交渉・和解）</strong></mark>：何年も裁判するより早く安い。例：<strong>Chatime と Tealive</strong>（元フランチャイジーの Tealive と争ったが、最終的に和解して両社とも営業中）。ライセンス契約にする道もある。</li>
+<li><strong>国際的な保護</strong>：<strong>TRIPS</strong>（WTO の最低基準・強い執行）、<strong>Paris Convention</strong>（外国でも同じ扱い・商標は6ヶ月の優先権）、<strong>Berne Convention</strong>（著作権は加盟国で自動保護）。マレーシアには <strong>IP Court</strong> もある。</li>
+</ol>
+<p class="rights">🔁 <b>対立する権利</b>：Fitness4U の「投資と IP を守る権利」 vs Health Vibe の「自由に競争・改良する権利」（アイデアや機能は誰でも使える）／消費者の「だまされない権利」</p>
+<p class="en">✍ "There are competing rights between Fitness4U's right to protect its intellectual property and Health Vibe's right to compete freely in the market."</p>
+<h4 id="r1-q2-acm">R1-Q2 銀行アプリの脆弱性を公開すべきか（ACM）</h4>
+<p class="scene">📌 <b>状況</b>：セキュリティ会社のエンジニアが、広く使われている銀行アプリの弱点を発見。有名になりたくて掲示板に公開しようか迷うが、公開すれば何百万人が詐欺に遭うかもしれない。</p>
+<h5 id="a-acm-10">(a) 関係する ACM 原則を挙げよ（10点）</h5>
+<p><b>何を聞いている？</b> ACM 原則を3つ、シナリオに当てはめて説明する。講師いわく「一般論だけでなく<strong>シナリオに当てはめると加点</strong>」。弱点の中身は書かれていないので「パスワード漏洩」「バックドア」など<strong>自分で具体化してOK</strong>。</p>
+<ol>
+<li><mark><strong>1.2 Avoid harm（害を与えない）</strong></mark>：修正前に公開すると、犯罪者がすぐ悪用 → 利用者がお金を失う。予測できる害なので違反。</li>
+<li><mark><strong>1.1 Contribute to society and human well-being（社会に貢献）</strong></mark>：技術は人の安全を守るためのもの。自分の名声のために利用者を危険にさらすのは逆。</li>
+<li><mark><strong>1.3 Be honest and trustworthy（正直）</strong></mark>：弱点を隠すのでも悪用するのでもなく、銀行に正直に報告すべき。</li>
+<li>（＋α）<strong>1.7 Honor confidentiality（秘密保持）</strong>、<strong>2.5 リスク評価（risk analysis）</strong>、<strong>2.9 安全なシステム（robustly secure systems）</strong></li>
+</ol>
+<p class="en">✍ "Under ACM 1.2 Avoid harm, the engineer must not post the flaw publicly, because attackers could exploit it to steal money from millions of users before the bank fixes it."</p>
+<h5 id="b-15_1">(b) 公開した場合・しない場合の倫理的影響を比較せよ（15点）</h5>
+<p><b>何を聞いている？</b> 「公開したら？」「しなかったら？」を<strong>利害関係者ごとに</strong>比べる。講師いわく「両方の側を例つきで書けば満点」。</p>
+<p><strong>公開した場合（Disclosure）</strong></p>
+<ul>
+<li><strong>ハッカー（attackers / cybercriminals）</strong>：すぐに弱点を悪用できる（exploit the vulnerability）</li>
+<li><mark><strong>利用者（users）</strong>：お金を盗まれる（financial loss）</mark>・個人情報を悪用される（identity theft）・ネットバンキングを信用しなくなる（loss of trust）</li>
+<li><strong>銀行（the bank）</strong>：評判が落ち（reputational damage）、修正の時間もなく危機対応（crisis management）に追われる</li>
+<li><strong>エンジニア（the engineer）</strong>：一時的に注目される（short-term recognition）が、自分勝手（selfish）で ACM 違反。功利主義で見ても害 ≫ 利益</li>
+</ul>
+<p><strong>公開しない場合（Non-disclosure）</strong></p>
+<ul>
+<li><strong>完全に黙る（stay silent）</strong>のもダメ：弱点が放置される。義務論では「専門家として報告する義務（professional duty to report）」がある</li>
+<li><mark><strong>銀行にだけ非公開で報告する</strong>のがベスト</mark>（<strong>responsible disclosure＝責任ある開示</strong>）：銀行が修正 → 利用者は守られる → エンジニアも <strong>bug bounty（報奨金）やパッチノートでのクレジット</strong>で評価される</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：社会の「危険を知る権利（right to know）」 vs 利用者の「安全・プライバシーの権利」／エンジニアの「認められたい気持ち」 vs 銀行の「商業的利益」と利用者の安全</p>
+<p class="en">✍ "There are competing rights between the public's right to know about security risks and users' right to security and privacy."</p>
+<p class="en">✍ "The best option is responsible disclosure: the engineer should report the flaw privately to the bank so that it can be fixed before the public is informed."</p>
+<h4 id="r1-q3-ec">R1-Q3 EC サイトのクレジットカード情報流出（サイバー犯罪）</h4>
+<p class="scene">📌 <b>状況</b>：マレーシアで営業する国際 EC サイトが、年末セール中に決済システムの弱点を突かれ、数千人のカード情報が盗まれてダークウェブで売られた。</p>
+<h5 id="a-5">(a) サイバー犯罪を定義し、種類を分類せよ（5点）</h5>
+<p><b>何を聞いている？</b> 定義＋このケースの分類。5点なので短く。</p>
+<ul>
+<li><mark><strong>定義</strong>：コンピュータが<strong>道具（tool）</strong>、<strong>標的（target）</strong>、またはその両方になる違法行為。</mark></li>
+<li><strong>成立要件（elements of the crime）</strong>：<strong>actus reus（行為）</strong>＝決済システムに侵入しデータを抜いた ＋ <strong>mens rea（悪意）</strong>＝無許可だと知っていて意図的にやった。</li>
+<li><mark><strong>分類</strong>：</mark>決済システムへの侵入＝<strong>コンピュータが標的（hacking）</strong>。カード情報の窃盗・販売＝<strong>コンピュータが道具（credit card fraud・identity theft・data theft）</strong>。</li>
+<li><strong>法律</strong>：<strong>Computer Crimes Act 1997 s3</strong>（不正アクセス＝unauthorised access）、<strong>s4</strong>（詐欺目的の不正アクセス＝unauthorised access with intent to commit fraud、RM150,000／10年）。犯人が国外でも <strong>s9(1)</strong> で処罰可。</li>
+</ul>
+<h5 id="b-10">(b) 利害関係者への影響を論じよ（10点）</h5>
+<p>講師の注意：シナリオでは<strong>すでに盗まれている</strong>ので「may（かもしれない）」ではなく断定で書く。</p>
+<ul>
+<li><mark><strong>顧客（customers）</strong>：不正利用でお金を失う（financial loss from fraudulent transactions）</mark>・なりすまし被害（identity theft）・カードの再発行・ネットショッピングへの不信（loss of trust in online shopping）。</li>
+<li><mark><strong>会社（the company）</strong>：調査・システム改修・補償の費用（cost of investigation, system recovery and compensation）、<strong>評判の失墜（reputational damage）</strong></mark>、顧客離れ（loss of customers）、<strong>PDPA の Security Principle（安全管理の原則）違反</strong>での罰則。さらに<strong>当局（Commissioner）への報告義務（duty to notify the regulator）</strong>がある（講師が強調。PDPA 2024年改正）。</li>
+<li><strong>規制当局（regulators）</strong>（個人データ保護局・中央銀行・警察）：会社がルール（SOP）を守っていたか調査し（investigate compliance）、法的措置をとる（take legal / enforcement action）。被害者が世界中にいるので国際協力（international cooperation）も必要。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：顧客の「プライバシー・データ安全の権利」 vs 会社の「コストを削りたい商業的利益」／当局の「公共の利益」 vs 企業の「営業の自由」</p>
+<p class="en">✍ "There are competing rights between customers' right to privacy and data security and the company's commercial interest in reducing costs."</p>
+<h5 id="c-10">(c) 法的・技術的な対策を提案せよ（10点）</h5>
+<ul>
+<li><mark><strong>法的対策</strong>：<strong>PDPA 2010</strong> を守る</mark>（Security・Retention・Notice and Choice の原則などの名前を書くと加点）。EU の客がいれば <strong>GDPR（72時間以内に報告）</strong>。<strong>外部への報告手順（external reporting）</strong>（当局・顧客）と<strong>内部の報告手順（internal reporting）</strong>（攻撃を防げた場合も記録を残す）を作る（講師の補足）。</li>
+<li><mark><strong>技術的対策</strong>：<strong>暗号化（encryption）</strong>、<strong>多要素認証（MFA）</strong></mark>、<strong>ファイアウォール（firewall）</strong>、<strong>侵入検知システム（intrusion detection system, IDS）</strong>、定期的なパッチ適用（regular patching）と<strong>侵入テスト（penetration testing）</strong>、アクセス権限の最小化（access control）、<strong>社員へのセキュリティ研修（staff cybersecurity training）</strong>（フィッシング対策）。</li>
+</ul>
+<h4 id="r1-q4-ai-ai">R1-Q4 人事担当が AI で社内規定を作成・AI 使用を隠し・誤りで問題に</h4>
+<p class="scene">📌 <b>状況</b>：人事（HR）担当者が AI でリモートワーク規定を作り、AI を使ったことを言わずに提出。規定に重大な誤りがあり、社員とのトラブルや訴訟になった。</p>
+<h5 id="a-10">(a) 倫理違反にあたるか評価せよ（10点）</h5>
+<p><mark><strong>結論：倫理違反にあたる。</strong></mark> 講師いわく「AI の成果を自分のものと主張したこと」と「自分で確認しなかったこと」の2点が軸。</p>
+<ol>
+<li><mark><strong>ACM 1.3 Be honest（正直）</strong></mark>：AI 生成と言わずに（failed to acknowledge AI-generated content）自分の仕事として出した＝会社をだました（misled the employer）。<strong>義務論</strong>では結果に関係なく嘘は悪。</li>
+<li><strong>ACM 2.1／2.2 品質・専門能力（quality / professional competence）</strong>：内容を確認せずに提出（did not verify accuracy）＝AI への過度な依存（overreliance on AI）。</li>
+<li><mark><strong>ACM 1.2 Avoid harm（害を与えない）</strong></mark>：誤りで社員と会社に損害を与えた。</li>
+<li><strong>会社のルール（organisational policies）</strong>：AI 利用ルール違反（breach of the AI-use policy）、社員の個人情報を AI に入れていれば <strong>PDPA</strong> の問題も。</li>
+<li><strong>功利主義</strong>：本人が時間を節約した得より、多くの社員と会社の評判が受けた害の方が大きい。</li>
+</ol>
+<h5 id="b-15_2">(b) 本人と会社への影響（法的・評判のリスク）を分析せよ（15点）</h5>
+<p>講師いわく「<strong>本人と会社の2者が最低限</strong>。他の社員や政府まで書くと加点」。</p>
+<ul>
+<li><mark><strong>HR 担当者本人（the HR executive）</strong></mark>：懲戒・解雇（disciplinary action / dismissal）、信用とキャリアを失う（loss of credibility and career）。本人は「早く仕事を終わらせて評価されたい」という個人的な利益（personal interest）で動いたが、方法が間違っていた。</li>
+<li><mark><strong>会社（the organisation）</strong>：社員からの<strong>訴訟（legal claims from employees）</strong></mark>、使用者としての責任（vicarious liability）、規定の作り直しの費用、<strong>評判の悪化（reputational damage）</strong>、社員の士気低下（low morale）。HR は社員の手本になる立場なので、信頼のダメージが大きい。</li>
+<li><strong>他の社員（other employees）</strong>：誤った規定でリモートワークの扱いが混乱する。</li>
+<li><strong>政府（人的資源省）（the government / Ministry of Human Resources）</strong>：規定が国の方針とずれていれば、政策の実施にも影響。</li>
+<li><strong>著作権のリスク（copyright risk）</strong>：AI の出力が他人の文章をコピーしている可能性。</li>
+<li><strong>再発防止</strong>：AI 利用の開示ルール（AI disclosure policy）、人間によるチェック（human review）、研修（training）。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：会社の「AI で効率化したい利益」 vs 社員の「公正で正確な規定を受ける権利」／HR 担当者の「仕事のやり方の自由」 vs 会社の「説明責任」</p>
+<p class="en">✍ "There are competing interests between the organisation's interest in efficiency through AI and employees' right to fair and accurate policies."</p>
+<h3 id="revision-2">Revision 2</h3>
+<h4 id="r2-q1-ar">R2-Q1 AR アプリに画家の作品が無断アップロード</h4>
+<p class="scene">📌 <b>状況</b>：AR アプリ（現実の場所に仮想の絵や物を置ける）が人気に。ユーザーが画家の作品を無断でアップロードし、何千人もが見る AR 体験に使った。</p>
+<h5 id="a-ar-10">(a) AR の中のデジタルアートに著作権は及ぶか（10点）</h5>
+<p><mark><strong>結論：及ぶ。</strong></mark></p>
+<ol>
+<li>デジタルアートも著作権法上の <mark><strong>artistic work（美術の著作物）</strong></mark>。紙でもデジタルでも AR でも、媒体は関係ない（regardless of the medium）。</li>
+<li><mark>保護は<strong>自動（automatic）</strong></mark>：①<strong>オリジナル（original）</strong>で ②<strong>形に固定（fixed in material form）</strong>されていれば（デジタルデータの保存も含む） ③作者が条件を満たせば発生。<strong>Berne Convention</strong> で外国でも保護される。</li>
+<li>AR に載せる＝<strong>複製（reproduction）</strong>（2D→3D も含む）＋<strong>公衆への送信（communication to the public）</strong> → 許可なしなら <strong>s36 の侵害</strong>。</li>
+<li><strong>WIPO Copyright Treaty</strong> はデジタル環境の著作権を守る条約。作者には <strong>moral rights（人格権）</strong>もある：名前を表示させる権利（paternity）、勝手に改変されない権利（integrity）。インフルエンサーの商業利用は <strong>fair dealing（公正利用）</strong> にあたらない。</li>
+</ol>
+<h5 id="b-3ip-15">(b) 3者の立場から、IP 保護と創作の促進をどう両立させるか（15点）</h5>
+<p><b>何を聞いている？</b> 3者それぞれの立場と、どうすればバランスが取れるか。</p>
+<ul>
+<li><mark><strong>(i) コンテンツクリエイター（ユーザー）</strong></mark>：表現の自由・創作の自由（freedom of expression and creativity）がある。でも他人の作品を使うなら<strong>ライセンスを取る・クレジットを書く・自分で作る（obtain a licence, give credit, create original work）</strong>。フリー素材（Creative Commons）を使う。</li>
+<li><mark><strong>(ii) 画家（著作権者）</strong></mark>：複製・配布する権利（経済的権利＝economic rights）と人格権（moral rights）がある。<strong>削除要請（takedown）</strong>、差止（injunction）、損害賠償（damages）で守れる。逆に<strong>プラットフォームにライセンスを出して収入にする（license their work for revenue）</strong>こともできる。</li>
+<li><mark><strong>(iii) プラットフォーム運営者</strong></mark>：<strong>通報と削除の仕組み（notice-and-takedown）</strong>、画像照合による自動検出（content-matching technology）、明確な利用規約（clear terms of service）、ライセンス済み素材のマーケット（licensing marketplace）、収益分配（revenue sharing）。放置すると侵害を「許した（authorise）」として責任を問われる（s36）。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：画家の「著作権」 vs クリエイターの「表現・創作の自由」／運営者の「人気を伸ばしたい商業的利益」 vs 「侵害を防ぐ責任」</p>
+<p class="en">✍ "There are competing rights between artists' copyright and content creators' freedom of expression and creativity."<br />
+理論：<strong>自然権（natural rights）</strong>（Locke：自分の労働で作ったものは自分の財産）、<strong>功利主義（utilitarianism）</strong>（自由な創作は多くの人を楽しませる）、<strong>ACM 1.5</strong>（創作への敬意）</p>
+<h4 id="r2-q2-vr">R2-Q2 VR 空間の仮想ファッションのデザインとブランドを模倣</h4>
+<p class="scene">📌 <b>状況</b>：VR プラットフォームでアバター用の服やアクセサリーを作って売れる。人気デザイナーの作品を競合がコピーし、似たブランド名で販売。</p>
+<h5 id="a-ip-10_1">(a) どの IP 保護が使えるか（10点）</h5>
+<ol>
+<li><mark><strong>Copyright（著作権）</strong></mark>：3D デザイン・テクスチャ・グラフィック＝美術の著作物（artistic works）。自動で保護（automatic protection）。</li>
+<li><mark><strong>Trademark（商標）</strong></mark>：デザイナーの<strong>ブランド名・ロゴ（brand name and logo）</strong>。<strong>似たブランド名（confusingly similar brand name）</strong>はユーザーを混同させる（cause confusion）。仮想商品の分野で登録しておくべき（register the mark for virtual goods）。未登録でも passing off。</li>
+<li><strong>Patent（特許）</strong>は見た目のデザインには基本使えない（技術的な発明ではないため）。プラットフォームの利用規約（契約）も関係する。</li>
+</ol>
+<h5 id="b-5">(b) 使える救済（5点）</h5>
+<p><mark>差止（injunction：販売停止・削除）、損害賠償（damages）、利益の吐き出し（account of profits）</mark>、侵害品の引渡し（delivery up）／プラットフォームによる削除（takedown）、侵害の宣言（declaration）、法定損害賠償（statutory damages）（1作品 RM25,000まで）。</p>
+<h5 id="c-ip-10">(c) メタバースのビジネスで IP がますます重要な理由（10点）</h5>
+<ul>
+<li>デジタル商品は<mark><strong>完璧に・大量に・一瞬でコピーできる（easily copied perfectly and at scale）</strong></mark>。しかも本物のお金が動く（real-money economy）（NFT・ゲーム内取引）。</li>
+<li>IP があるから<mark><strong>投資と創作の意欲（investment and incentive to innovate）</strong></mark>が守られる。<strong>本物を買えるという消費者の信頼（consumer trust in genuine products）</strong>にもつながる。ブランド価値は現実と仮想の両方にまたがる（例：エルメス対「MetaBirkins」NFT 訴訟、ナイキの仮想スニーカー）。</li>
+<li>プラットフォームは<strong>国境を越える（cross-border）</strong>ので、TRIPS・Berne・Paris などの国際ルールが必要。匿名性のため取り締まりが難しい。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：デザイナーの「IP」 vs 競合やユーザーの「自由に作る・アレンジする自由」／運営者の「商業的利益」 vs 「侵害を取り締まる責任」</p>
+<p class="en">✍ "There are competing rights between the designer's intellectual property rights and other users' freedom to create."</p>
+<h4 id="r2-q3-ai-ai">R2-Q3 学生が生成 AI で作品を作り、AI 使用を隠し、既存作品にそっくり</h4>
+<p class="scene">📌 <b>状況</b>：マルチメディア専攻の学生が生成 AI で画像・アニメ・広告素材を作り、商業プロジェクトに自分の名前で提出。AI 使用は言わず、一部がプロの作品に酷似していた。</p>
+<h5 id="a-acm-10_1">(a) ACM か倫理理論を使って、倫理的かどうか論じよ（10点）</h5>
+<p><mark><strong>結論：倫理的ではない。</strong></mark></p>
+<ul>
+<li><mark><strong>ACM 1.3（正直）</strong></mark>：AI の作品を自分の作品として出した（presented AI work as his own）＝<strong>盗作（plagiarism）</strong>・偽り（misrepresentation）。</li>
+<li><mark><strong>ACM 1.5（創作への敬意）</strong></mark>：プロの作品に酷似＝著作権侵害のおそれ（risk of copyright infringement）（作品の<strong>重要な部分の複製（reproduction of a substantial part）</strong>は s36 違反）。</li>
+<li><strong>ACM 1.2（avoid harm）</strong>：画家の収入と評判（artists' income and reputation）、そしてクライアントに損害。</li>
+<li><strong>義務論（deontology）</strong>：結果に関係なく嘘は悪。<strong>功利主義（utilitarianism）</strong>：学生の短期的な得 &lt; 画家・クライアント・社会の信頼への害。<strong>自然権（natural rights）</strong>：画家には自分の労働の成果を守る権利（right to the fruits of their labour）がある。</li>
+</ul>
+<h5 id="b-ai-15">(b) クリエイティブ業界で AI を責任をもって使う方法を提案せよ（15点）</h5>
+<ol>
+<li><mark><strong>AI 使用の開示（transparency / disclosure of AI use）</strong></mark>（ラベル・クレジットに「AI 使用」と書く）</li>
+<li><mark><strong>許可を得た学習データ（licensed / consented training data）</strong></mark>を使う。画家が学習を拒否できる仕組み（opt-out）、<strong>使用料の支払い（fair compensation / royalties）</strong></li>
+<li><mark><strong>人間の創作とチェック（human creativity and review）</strong></mark>：AI は補助（AI as an assistant tool）。出力が既存作品に似ていないか画像検索で確認</li>
+<li><strong>ルール作り（clear AI policies）</strong>：大学・会社の AI ポリシー、権利の帰属を契約で決める</li>
+<li><strong>法律を守る（legal compliance）</strong>：著作権、肖像や個人データなら PDPA</li>
+<li><strong>教育（education and training）</strong>：AI 倫理の研修、業界の行動規範（industry codes of conduct）</li>
+</ol>
+<p class="rights">🔁 <b>対立する権利</b>：AI による「効率化・イノベーション」 vs 画家の「著作権」／学生の「ツールを使う自由」 vs クライアントや社会の「正直な仕事を受け取る権利」</p>
+<p class="en">✍ "There are competing interests between innovation through AI and artists' copyright."</p>
+<h4 id="r2-q4-vr">R2-Q4 ソーシャル VR が表情・視線・声を集めて広告主と共有</h4>
+<p class="scene">📌 <b>状況</b>：ソーシャル VR が、表情・視線・声・行動データを集めている。規約には書いてあるが多くのユーザーは理解していない。データが広告主に共有されていた。</p>
+<h5 id="a-10_1">(a) 生体・行動データ収集の社会的メリットとリスク（10点）</h5>
+<ul>
+<li><mark><strong>メリット（benefits）</strong></mark>：没入感のある体験（immersive experience）、個人に合わせた内容（personalisation）、<strong>障害者のアクセシビリティ（accessibility for disabled users）</strong>（視線で操作）、健康・リハビリへの応用（healthcare and therapy）、迷惑行為の監視（safety moderation）、人とのつながり（social connection）。</li>
+<li><mark><strong>リスク（risks）</strong></mark>：<strong>生体データは変えられない（biometric data is permanent）</strong>（顔は取り替えられない）、<strong>感情に合わせた広告での操作（profiling and manipulation）</strong>、監視社会（surveillance）、データ流出・なりすまし（data breach / identity theft）、差別（discrimination）、萎縮効果（chilling effect）。</li>
+</ul>
+<h5 id="b-15_3">(b) プライバシー・同意・データ収集の倫理的・法的問題と、ユーザーの権利を守る方法（15点）</h5>
+<ul>
+<li><strong>倫理（ethical concerns）</strong>：長く分かりにくい規約（long, unclear terms and conditions）への「同意」は<mark><strong>本当の意味での同意（informed consent）ではない</strong></mark>。<strong>ACM 1.6（プライバシー）・1.3（正直）・1.2（害を与えない）</strong>違反。<strong>自然権（natural rights）</strong>：自分の体とデータは自分のもの（autonomy over personal data）。<strong>義務論（deontology）</strong>：人を広告収入の道具として扱っている（treating users as a means to profit）。</li>
+<li><strong>法律</strong>：<mark><strong>PDPA 2010</strong></mark> の <strong>General（同意）</strong>・<strong>Notice and Choice（通知と選択）</strong>・<strong>Disclosure（集めた目的以外で第三者に渡さない）</strong>・Security・Retention の原則に違反のおそれ。健康に関わるデータは <strong>sensitive personal data（センシティブ情報）</strong>で明確な同意（explicit consent）が必要。<strong>GDPR</strong> では生体データは特別なカテゴリー（special category data）。データ最小化（data minimisation）・目的の限定（purpose limitation）・異議を唱える権利（right to object）がある。</li>
+<li><mark><strong>守る方法（how to protect users）</strong></mark>：分かりやすい段階的な通知（clear, layered privacy notices）、データの種類ごとに<strong>オプトイン（opt-in consent）</strong>で同意、<strong>privacy by design（最初から設計にプライバシーを組み込む）</strong>、端末内での処理（on-device processing）、匿名化（anonymisation）、暗号化（encryption）、広告主に売らない（no sharing with advertisers）、いつでも同意を取り消せる画面（option to withdraw consent）、外部監査（independent audits）。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：ユーザーの「プライバシー権」 vs 会社の「広告収入という商業的利益」／没入体験の「イノベーション」 vs ユーザーの「自己決定」</p>
+<p class="en">✍ "There are competing rights between users' right to privacy and the company's commercial interest in advertising revenue."</p>
+<h3 id="revision-3">Revision 3</h3>
+<h4 id="r3-q1-ai">R3-Q1 大学の AI 監視型学習プラットフォーム（視線追跡あり）</h4>
+<p class="scene">📌 <b>状況</b>：大学が出席・学習習慣・オンライン授業中の視線・成績を追跡する AI を導入。支援が必要な学生を見つけられるが、学生は監視の範囲を十分に知らされておらず不安に感じている。</p>
+<h5 id="a-ai-10">(a) 教育での AI 監視の社会的・倫理的問題（10点）</h5>
+<ul>
+<li><mark><strong>プライバシーと監視（privacy and surveillance）</strong></mark>：視線は生体データ（biometric data）。常に見られている。</li>
+<li><mark><strong>同意と透明性の欠如（lack of informed consent and transparency）</strong></mark>：どこまで監視されるか知らされていない。</li>
+<li><strong>萎縮効果・ストレス・信頼の低下（chilling effect, stress, loss of trust）</strong>：学生が自然にふるまえない。</li>
+<li><mark><strong>偏見と差別（bias and discrimination）</strong></mark>：発達特性のある学生やネット環境が悪い学生を「不真面目」と誤判定。</li>
+<li><strong>データの安全（data security）</strong>：漏洩のリスク（risk of data breach）。</li>
+<li><strong>目的外利用（function creep）</strong>：支援のためのデータが処分に使われる。</li>
+</ul>
+<h5 id="b-15_4">(b) 大学の利用は正当化できるか。イノベーションとプライバシーをどう両立させるか（15点）</h5>
+<ul>
+<li><mark><strong>結論：条件つきで正当化できる。</strong></mark> 早期支援・個別学習という利益（early support, personalised learning＝<strong>功利主義</strong>）はあるが、学生の自己決定（autonomy＝<strong>自然権</strong>）や尊厳（dignity＝<strong>義務論</strong>：学生を手段ではなく目的として扱う）を傷つけない範囲に限る。</li>
+<li><mark><strong>両立の方法</strong></mark>：<strong>PDPA の Notice and Choice（通知と同意）</strong>、<strong>データ最小化（data minimisation）</strong>（視線追跡まで本当に必要？）、目的の限定（purpose limitation）、保存期間の制限（retention limits）、監視を拒否できる選択肢（opt-out option）、AI の判断を<strong>人間が確認（human review of AI decisions）</strong>、<strong>プライバシー影響評価（privacy impact assessment）</strong>、学生の意見を聞く（consult students）、セキュリティ対策（ACM 1.6・1.7・2.5）。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：大学の「成績を上げたい利益」 vs 学生の「プライバシー権」／講師の「支援する責任」 vs 学生の「自己決定」</p>
+<p class="en">✍ "There are competing rights between the university's interest in improving academic performance and students' right to privacy."</p>
+<h4 id="r3-q2-vr">R3-Q2 VR 研修が視覚障害者・乗り物酔いしやすい人を排除</h4>
+<p class="scene">📌 <b>状況</b>：世界中の社員が使う VR 研修。視覚障害や乗り物酔いのある社員が使えず、研修の機会から排除されていると訴えた。</p>
+<h5 id="a-10_2">(a) アクセシビリティと包摂性に関する倫理的・社会的問題（10点）</h5>
+<ul>
+<li><mark><strong>差別・排除（discrimination and exclusion）</strong></mark>：<strong>ACM 1.4（公平・差別しない）</strong>違反。</li>
+<li><strong>デジタルデバイド（digital divide）</strong>：使える人と使えない人の格差。</li>
+<li><mark><strong>健康被害（health risks）</strong></mark>：乗り物酔い（motion sickness）（<strong>ACM 1.2 害を与えない</strong>）。</li>
+<li><strong>キャリアの不平等（unequal career opportunities）</strong>：研修を受けられない → 昇進に不利。</li>
+<li><strong>ユニバーサルデザインの欠如（lack of universal / inclusive design）</strong>、職場の士気低下（low morale）。</li>
+</ul>
+<h5 id="b-15_5">(b) 開発者の責任と、怠った場合の結果（15点）</h5>
+<ul>
+<li><mark><strong>責任</strong></mark>：<strong>誰でも使えるデザイン（universal design）</strong>、アクセシビリティ基準（accessibility standards, WCAG）、音声ガイド・振動での案内・酔いにくいモード・座ったまま使えるモード（audio description, haptic feedback, comfort mode, seated mode）、<strong>障害のある人とのテスト（user testing with disabled people）</strong>、2D 版など代わりの方法（alternative formats）、<strong>事前のリスク評価（risk assessment, ACM 2.5）</strong>。</li>
+<li><mark><strong>怠った結果</strong></mark>：差別として訴えられる（discrimination claims：マレーシア <strong>Persons with Disabilities Act 2008</strong>、労働法）、評判の悪化（reputational damage）、人材の流出（loss of talent）、研修投資のムダ（wasted investment）。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：会社の「コストを抑えて早く導入したい利益」 vs 社員の「平等に機会を得る権利」／イノベーション vs 包摂</p>
+<p class="en">✍ "There are competing interests between the company's commercial interest in reducing costs and employees' right to equal access."</p>
+<h4 id="r3-q3-ai-ai">R3-Q3 AI バーチャルインフルエンサー（AI だと知らされていない）</h4>
+<p class="scene">📌 <b>状況</b>：SNS が AI のインフルエンサーを導入し、商品をおすすめしたりコメントに返信したりする。多くの人は本物の人間だと思っていて、その推薦で買い物をしている。</p>
+<h5 id="a-10_3">(a) 倫理的問題（10点）</h5>
+<ul>
+<li><mark><strong>欺瞞（deception）</strong></mark>：AI だと隠している（<strong>ACM 1.3 正直</strong>違反）</li>
+<li><mark><strong>購買の操作（manipulation of purchasing decisions）</strong></mark>：信頼を利用して買わせる</li>
+<li><strong>責任の所在が不明（lack of accountability）</strong>：嘘の宣伝をしても誰が責任を取る？</li>
+<li><strong>弱い立場の人の搾取（exploitation of vulnerable users）</strong>：特に10代</li>
+<li><strong>信頼の崩壊（erosion of trust）</strong>、やり取りのデータの<strong>プライバシー（privacy）</strong>、人間のインフルエンサーの<strong>失業（job loss）</strong></li>
+</ul>
+<h5 id="b-ai-15_1">(b) AI 使用の開示を義務にすべきか。社会の信頼と消費者行動への影響（15点）</h5>
+<ul>
+<li><mark><strong>義務にすべき</strong></mark>：「AI generated」「#ad」の表示（mandatory disclosure / labelling）。<strong>義務論</strong>（だまさない義務＝duty not to deceive）、消費者保護（<strong>Consumer Protection Act 1999</strong>：誤解を招く広告の禁止＝misleading advertising）、EU AI Act の透明性ルール。</li>
+<li><mark><strong>信頼への影響（impact on public trust）</strong></mark>：隠していたことがバレると、プラットフォームとブランドへの信頼が崩れる（loss of trust / backlash）。開示すれば消費者は理解したうえで選べる（informed choice）し、それでも楽しめる。</li>
+<li><strong>消費者行動への影響（impact on consumer behaviour）</strong>：「友達のような存在」への信頼から衝動買い（impulse buying）→ メディアリテラシー教育（media literacy）も必要。</li>
+<li><strong>反対意見（counter-argument）</strong>：規制しすぎるとイノベーションを妨げる（over-regulation may limit innovation）→ 分かりやすく軽めの表示ルールでバランス。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：会社の「商業的利益・イノベーションの自由」 vs 消費者の「正しい情報を受け取る権利」</p>
+<p class="en">✍ "There are competing rights between the company's commercial interest and consumers' right to truthful information."</p>
+<h4 id="r3-q4-ar">R3-Q4 AR アプリで学校や公共施設の前に不快な投稿</h4>
+<p class="scene">📌 <b>状況</b>：現実の場所にメッセージや画像を置ける AR アプリ。創作表現のためのアプリなのに、学校・店・公共施設の前に不快なコンテンツを置くユーザーが出てきた。</p>
+<h5 id="a-ar-10_1">(a) AR の悪用による倫理的・社会的問題（10点）</h5>
+<p>不快・差別的な発言（offensive content / hate speech）、<mark><strong>嫌がらせ・ネットいじめ（harassment and cyberbullying）</strong></mark>、<strong>名誉毀損（defamation）</strong>（デジタルで残る＝libel）、<strong>子どもが有害コンテンツを見る（harm to children）</strong>、他人の建物への<strong>デジタル落書き（digital vandalism）</strong>、公共の秩序の乱れ（threat to public order）。</p>
+<h5 id="b-15_6">(b) ユーザー・開発者・運営者の責任（15点）</h5>
+<ul>
+<li><mark><strong>ユーザー（users）</strong></mark>：法律を守り、他人を尊重する（act lawfully and respectfully）。<strong>CMA 1998 s233</strong>（不快・脅迫的な発信、RM50,000／1年）、<strong>Defamation Act 1957</strong>、刑法で責任を問われる。</li>
+<li><mark><strong>開発者（developers）</strong></mark>：<strong>最初から安全に設計（safety by design）</strong>：学校の周りでは投稿できない設定（geofencing）、年齢制限（age verification）、フィルター（content filters）、通報機能（reporting tools）。<strong>ACM 1.2（害を与えない）・2.5（リスク評価）</strong>。</li>
+<li><mark><strong>運営者（platform operators）</strong></mark>：コミュニティガイドライン（community guidelines）、<strong>監視と削除（content moderation and takedown）</strong>、当局への協力（cooperate with authorities）、透明性レポート（transparency reports）。</li>
+<li><mark>言論の自由は<strong>絶対ではない（freedom of speech is not absolute）</strong></mark>：<strong>憲法 Art 10(2)</strong> で公共の秩序や道徳（public order and morality）のために制限できる。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：ユーザーの「表現の自由（Art 10(1)）」 vs 「公共の秩序と子どもの保護」／建物の所有者の権利 vs 創作表現</p>
+<p class="en">✍ "There are competing rights between users' freedom of expression and the public's interest in public order and the protection of children."</p>
+<h3 id="revision-4">Revision 4</h3>
+<h4 id="r4-q1">R4-Q1 ディープフェイク動画</h4>
+<p class="scene">📌 <b>状況</b>：SNS が AI で本人そっくりの動画を作れる機能を公開。有名人・政治家・一般人が言っていないことを言っている偽動画が作られ、被害者が名誉と精神的苦痛を訴えている。</p>
+<h5 id="a-10_4">(a) ディープフェイクの倫理的・社会的問題（10点）</h5>
+<p><mark><strong>名誉毀損と評判の破壊（defamation and reputational damage）</strong></mark>、<strong>精神的苦痛（emotional distress）</strong>、<strong>本人の同意なく顔を使う（use of likeness without consent / privacy）</strong>、<strong>フェイクニュース・選挙の操作（misinformation and election manipulation）</strong>、<strong>同意のない性的コンテンツ（non-consensual sexual content）</strong>、詐欺（fraud / voice-cloning scams）、「何が本物か分からない」という社会の信頼の崩壊（erosion of public trust）。</p>
+<h5 id="b-15_7">(b) テック企業の責任と、法規制は必要か（15点）</h5>
+<ul>
+<li><mark><strong>企業の責任（responsibilities of tech companies）</strong></mark>：顔を使う人の<strong>同意確認（consent verification）</strong>、AI 生成物への<strong>透かし・ラベル（watermarking and labelling）</strong>、検出ツール（detection tools）、素早い削除（fast takedown）、通報窓口（reporting system）、政治・性的なディープフェイクの禁止（ban harmful deepfakes）。<strong>ACM 1.2・1.3・1.6</strong>。</li>
+<li><strong>マレーシアの法律（Malaysian law）</strong>：<strong>CMA 1998 s233</strong>（虚偽・不快な発信。例：Fahmi Reza 事件 [2020]）、<strong>Defamation Act 1957</strong>（名誉毀損の4要件：発言がある・虚偽・本人を指す・第三者に公開された）、刑法 s499、PDPA（顔も個人データ）。EU AI Act はディープフェイクの表示を義務化。</li>
+<li><mark><strong>規制は必要か（is regulation necessary?）</strong></mark>：<strong>必要</strong>。企業はエンゲージメントで儲かるので自主規制（self-regulation）だけでは不十分。ただし風刺やパロディ（satire and parody）など<strong>言論の自由（freedom of speech）</strong>も守る必要があるので、対象を絞った適度な規制（targeted, proportionate regulation）にする。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：「表現・創作の自由」 vs 被害者の「名誉とプライバシーの権利」／企業の「商業的利益」 vs 社会の「真実を知る公共の利益」</p>
+<p class="en">✍ "There are competing rights between freedom of expression and victims' right to reputation and privacy."</p>
+<h4 id="r4-q2-ai">R4-Q2 AI 生成アートでクリエイターの仕事が減る</h4>
+<p class="scene">📌 <b>状況</b>：デジタルメディア会社が AI でアート・音楽・広告素材を作っている。人を雇うより速くて安い。クリエイターたちは仕事が減り、人間の創造性の価値が下がると心配している。</p>
+<h5 id="a-10_5">(a) 倫理的・社会的問題（10点）</h5>
+<p><mark><strong>失業・仕事の置き換え（unemployment / job displacement）</strong></mark>、<strong>人間の創造性の価値の低下（devaluation of human creativity）</strong>、<strong>学習データの著作権（copyright in training data）</strong>（画家に無断・無報酬）、<strong>AI 作品の権利は誰のもの？（ownership of AI-generated works）</strong>（人間の作者がいない）、似たような作品ばかりになる（lack of originality）、クライアントへの説明不足（lack of transparency）、偏見（bias）。</p>
+<h5 id="b-ai-15_2">(b) 組織は AI に大きく頼るべきか。クリエイティブ業界の将来への影響（15点）</h5>
+<ul>
+<li><mark><strong>賛成側（功利主義）</strong></mark>：速い・安い（faster and cheaper）・小さな会社でも使える（accessible to small businesses）・新しい仕事（new job opportunities）が生まれる。</li>
+<li><mark><strong>反対側</strong></mark>：著作権侵害の法的リスク（legal risk of copyright infringement）（例：<strong>Getty Images v Stability AI</strong>）、評判のリスク（reputational risk）、独自性がない（lack of originality）、働く人への害（ACM 1.1・1.5）、隠せばクライアントをだますことに（1.3）。</li>
+<li><mark><strong>バランスの取れた結論</strong></mark>：<strong>人間と AI の協働（human-AI collaboration）</strong>、リスキリング（reskilling / upskilling）、許可を得た学習データ（licensed training data）、AI 使用の開示（disclosure of AI use）、使用料の仕組み（royalty schemes）。</li>
+<li><strong>業界の将来（future of creative industries）</strong>：人間と AI を組み合わせた新しい職種が生まれ、「人間が作った」こと自体に価値がつく。著作権法の見直しが必要。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：会社の「効率化という商業的利益」 vs クリエイターの「生計と著作権」／イノベーション vs 公正な報酬</p>
+<p class="en">✍ "There are competing interests between the organisation's commercial interest in efficiency and creators' right to earn a living from their work."</p>
+<h4 id="r4-q3-vr-10">R4-Q3 VR ゲーム依存（10代・若者）</h4>
+<p class="scene">📌 <b>状況</b>：VR ゲームが10代に大人気。毎日何時間も仮想空間で過ごし、人付き合い・勉強・運動が減っている。親・教師・医療関係者が心配している。</p>
+<h5 id="a-10_6">(a) デジタル依存の社会的・倫理的問題（10点）</h5>
+<p><mark><strong>依存させる設計（addictive / persuasive design）</strong></mark>（やめられない仕組み・ガチャ＝loot boxes）、体の健康（physical health：酔い・目の疲れ・運動不足）、心の健康（mental health：孤立＝isolation・不安＝anxiety）、学業や対人スキルの低下（decline in education and social skills）、<strong>未成年は特に弱い立場（vulnerability of minors）</strong>、データの搾取（data exploitation）、家族の対立。</p>
+<h5 id="b-15_8">(b) 開発者の責任と、健康的な利用のための対策（15点）</h5>
+<ul>
+<li><mark><strong>責任</strong></mark>：<strong>ACM 1.1（幸せに貢献）・1.2（害を与えない）</strong>。ユーザーをだまして使わせる「ダークパターン（dark patterns）」を使わない。<strong>義務論</strong>：ユーザーを収入源ではなく人として扱う（treat users as ends, not as a source of revenue）。</li>
+<li><mark><strong>対策（measures）</strong></mark>：<strong>利用時間の制限・休憩のお知らせ（screen-time limits and break reminders）</strong>、<strong>ペアレンタルコントロール（parental controls）</strong>・年齢確認（age verification）、未成年にはガチャ禁止、利用状況の見える化（wellbeing dashboard）、セッションの上限、啓発キャンペーン（awareness campaigns）、政府のガイドライン（government guidelines）（例：中国の未成年のゲーム時間制限）。</li>
+<li><strong>評価（evaluation）</strong>：自主的な対策は無視されやすい → 規制と親の関与（regulation and parental involvement）を組み合わせる。ただし制限しすぎると本人の自由（autonomy）を奪う。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：会社の「長く遊ばせたい商業的利益」 vs ユーザーの「健康・幸せ」／ユーザーの「自由に遊ぶ権利」 vs 親や国の「未成年を守る責任」</p>
+<p class="en">✍ "There are competing interests between the company's commercial interest in user engagement and users' well-being."</p>
+<h4 id="r4-q4-bci">R4-Q4 脳とコンピュータをつなぐ機器（BCI）</h4>
+<p class="scene">📌 <b>状況</b>：考えるだけでアプリや仮想空間を操作できる BCI 機器。脳の活動データを集めて性能を上げている。教育・医療・アクセシビリティに大きな利点があるが、プライバシー・セキュリティ・悪用を心配する人もいる。</p>
+<h5 id="a-bci-10">(a) BCI の倫理的・社会的懸念（10点）</h5>
+<p><mark><strong>心のプライバシー（mental privacy）</strong></mark>（考えていることのデータ＝最も敏感な情報＝highly sensitive data）、<strong>同意の難しさ（difficulty of informed consent）</strong>（脳データから何が分かるか本人にも分からない）、<strong>セキュリティ（security / hacking risk）</strong>（脳データのハッキング＝CCA 1997 s3・s5）、<strong>操作と自己決定の喪失（manipulation and loss of autonomy）</strong>、<strong>差別（discrimination）</strong>（保険会社や雇用主が使う）、<strong>デジタルデバイド（digital divide）</strong>（お金持ちしか使えない）、健康への安全性（health and safety）。</p>
+<h5 id="b-15_9">(b) 政府は脳データを規制すべきか。開発企業の責任（15点）</h5>
+<ul>
+<li><mark><strong>規制すべき（governments should regulate）</strong></mark>：今の法律では不十分（existing law is insufficient）。<strong>PDPA</strong> は商取引の個人データを対象にしているが、脳データは<strong>センシティブ情報（sensitive personal data）</strong>として明確な同意（explicit consent）を必須にすべき。<strong>GDPR</strong> の特別カテゴリーも参考に。チリは2021年に憲法で「ニューロライツ（脳の権利）」を保護。</li>
+<li><strong>規制の中身</strong>：明確なオプトイン同意（opt-in consent）、目的の限定（purpose limitation）、第三者への販売禁止（ban on selling data to third parties）、セキュリティ基準（security standards）、外部監査（independent audits）。</li>
+<li><mark><strong>企業の責任（organisations' responsibilities）</strong></mark>：<strong>privacy by design</strong>、端末内での処理（on-device processing）、暗号化（encryption）、データ最小化（data minimisation）、透明性（transparency）、倫理委員会（ethics board）、<strong>ACM 1.6・1.7・2.9</strong>、医療機器としての安全テスト。</li>
+<li><strong>反対意見（counter-argument）</strong>：規制しすぎると医療やアクセシビリティの有益な技術が遅れる → リスクに応じた規制（risk-based regulation）にする。</li>
+</ul>
+<p class="rights">🔁 <b>対立する権利</b>：ユーザーの「心のプライバシーと自己決定」 vs 企業の「商業的利益・イノベーション」／政府の「公共の利益のための規制」 vs 企業の「営業の自由」</p>
+<p class="en">✍ "There are competing rights between users' right to mental privacy and autonomy and the company's commercial interest in innovation."</p>
+<h3 id="moodle-ip">サンプル試験（Moodle）— 講師が解説した「IPと経済」型</h3>
+<p><b>問題：IP はなぜ重要か、経済とどうつながるか。例を挙げて論じよ（25点）</b><br />
+講師いわく「分野の指定がない問題はラッキー。好きな業界（音楽・医療など）で例を出せばいい。<strong>ポイントを出すだけでなく、必ず経済につなげて説明する</strong>」。</p>
+<ol>
+<li><mark><strong>研究開発 → 商品化 → ロイヤリティという流れを生む</strong></mark>：例・音楽業界：著作権があるから作曲家に印税が入り、レコード会社は新しい音楽に投資する。医療：特許をとったレーザー手術機器を販売・ライセンスでき、病院も最先端治療で収益を得る。</li>
+<li><mark><strong>IP は「所有権」なので経済成長を生む</strong></mark>：売る・貸す（ライセンス）・会社の資産にできる → 会社の価値が上がる → <strong>税金</strong>を納める → 国の経済が潤う。マレーシア（MyIPO）も IP で経済を伸ばしたい。</li>
+<li><mark><strong>新しい商品・サービスを生む</strong></mark>：自動運転車、障害者の移動を助ける VR ゴーグル、<strong>VR 観光</strong>（モルディブのサンゴ礁のダイビングを配信 → 環境負荷なしで収入。講師が紹介した学生の研究）。</li>
+<li><strong>消費者の信頼とブランド価値</strong>（商標）：本物を見分けられる → 企業の信用。</li>
+<li><strong>公開による知識の共有</strong>（特許）：20年後は誰でも使える → さらなるイノベーション。</li>
+<li><strong>外国からの投資と貿易</strong>を呼び込む（TRIPS に合わせることで）。</li>
+</ol>
+<p class="rights">🔁 <b>反対側の視点</b>：IP は守る盾（shield）にも攻撃の剣（sword）にもなる（パテントトロール）。<strong>evergreening（特許の延命）</strong>：例・パナドールの改良版、スマホや OS の旧版サポート打ち切り。<strong>IP の権利 vs 公共の福祉</strong>（糖尿病やがんの特許薬が低所得国では高すぎる）。</p>
+<h3 id="r1-q2a-10">📝 文章答案の完成例（本番はこの形で書く）— R1-Q2(a) 10点</h3>
+<p>英語の答案と、その日本語訳を並べました。<strong>「原則名 → 意味 → シナリオでの具体例 → だから違反」の流れ</strong>を真似してください。</p>
+<blockquote>
+<p>The relevant ACM principles are avoid harm, contribute to society and human well-being, and be honest and trustworthy.</p>
+</blockquote>
+<p>関係する ACM 原則は「害を与えない」「社会と人々の幸せに貢献する」「正直で信頼できる」である。</p>
+<blockquote>
+<p>Firstly, under <strong>ACM 1.2 Avoid harm</strong>, computing professionals must avoid negative consequences such as financial loss and breach of personal data. In this scenario, if the engineer posts the vulnerability, for example a password leak or a backdoor in the login process, on a public forum before the bank fixes it, cybercriminals could immediately exploit it to steal money from millions of users. Therefore, public disclosure would directly breach this principle.</p>
+</blockquote>
+<p>第一に、ACM 1.2「害を与えない」により、専門家は金銭被害や個人データ流出などの悪い結果を避けなければならない。このケースでは、エンジニアが弱点（例：パスワード漏洩やログインのバックドア）を銀行の修正前に公開すれば、犯罪者がすぐに悪用し、何百万人もの利用者のお金を盗めてしまう。したがって公開はこの原則に直接違反する。</p>
+<blockquote>
+<p>Secondly, <strong>ACM 1.1 Contribute to society and human well-being</strong> requires professionals to use technology to protect people's safety and security. Keeping customers' money and data safe supports this principle, whereas exposing users to fraud for personal recognition puts the engineer's own interest above the public good.</p>
+</blockquote>
+<p>第二に、ACM 1.1「社会に貢献」は、技術を人々の安全を守るために使うことを求める。顧客のお金とデータを守ることはこの原則に沿うが、自分の名声のために利用者を詐欺の危険にさらすのは、公共の利益より自分の利益を優先することになる。</p>
+<blockquote>
+<p>Thirdly, <strong>ACM 1.3 Be honest and trustworthy</strong> requires transparency. The engineer should honestly report the flaw to the bank through proper channels rather than hide it or use it for fame. This also reflects <strong>deontology</strong>, because the engineer has a professional duty to act responsibly regardless of the personal benefit.</p>
+</blockquote>
+<p>第三に、ACM 1.3「正直」は透明性を求める。エンジニアは弱点を隠したり名声に使ったりせず、正式な窓口で銀行に正直に報告すべきである。これは<strong>義務論</strong>にも合う。個人的な得に関係なく、専門家には責任ある行動をとる義務があるからだ。</p>
+<blockquote>
+<p>There are competing interests between <strong>the public's right to know about security risks</strong> and <strong>users' right to security and privacy</strong>, as well as between <strong>the engineer's desire for recognition</strong> and <strong>the bank's commercial interest</strong>. Responsible disclosure balances these rights.</p>
+</blockquote>
+<p>ここには「社会がセキュリティの危険を知る権利」と「利用者の安全とプライバシーの権利」、そして「エンジニアの認められたい気持ち」と「銀行の商業的利益」という対立がある。責任ある開示（銀行にまず報告すること）がこれらのバランスを取る方法である。</p>
+<hr />
+</section><section class="sec drill"><h2 id="4-kahoot">4. 概念ドリル（Kahoot 復習問題・講師の解説付き）</h2>
+<blockquote>
+<p>右側を隠して即答できるまで。本番は記述式だが、ここの「理論×状況」の対応は記述でもそのまま使う。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>問題</th>
+<th>答え</th>
+<th>講師コメント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>IP保護の主目的</td>
+<td><strong>To encourage innovation while protecting creators' rights</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>開発者が発売延期になっても脆弱性を即報告 → 支える理論</td>
+<td><strong>Deontology</strong>（professional duty）</td>
+<td>会社への商業的影響はあるが顧客は守られる</td>
+</tr>
+<tr>
+<td>3</td>
+<td>学生が著作権のある講義動画を貧しい学生のために公開</td>
+<td><strong>Utilitarian goals but violates copyright</strong></td>
+<td>「教育目的・非営利」でも侵害。fair dealing は reasonable な量のみ</td>
+</tr>
+<tr>
+<td>4</td>
+<td>技術利用で生じる倫理問題の例</td>
+<td><strong>Collecting personal data without consent</strong></td>
+<td>Moodle の自習モジュール（個人データ・同意）もやる</td>
+</tr>
+<tr>
+<td>5</td>
+<td>会社が無断で従業員のネット活動を監視 → 最も影響を受けるのは</td>
+<td><strong>Employees</strong></td>
+<td>通知なし＝data protection &amp; consent</td>
+</tr>
+<tr>
+<td>6</td>
+<td>SNSアルゴリズムが誤情報を拡散 → ACM＋功利主義で適切な行動</td>
+<td><strong>Modify the algorithm to reduce harm even if engagement drops</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>コンピューティング専門職の倫理綱領を作った団体</td>
+<td><strong>ACM</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>医療アプリの既知の欠陥を隠せと指示 → 拒否を最も明確に要求する理論</td>
+<td><strong>Deontology</strong></td>
+<td>隠さず報告するのが役割</td>
+</tr>
+<tr>
+<td>9</td>
+<td>IP の一種は</td>
+<td><strong>Copyright</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>novelty と usefulness を満たすソフトウェア発明</td>
+<td><strong>Patent</strong></td>
+<td>patent = <strong>new + useful (industrial application)</strong></td>
+</tr>
+<tr>
+<td>11</td>
+<td>競合のソースコードをコピーしUIを変更 → 直接の被害者</td>
+<td><strong>Original software creator</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>IP保護の目的</td>
+<td><strong>Encourage innovation</strong></td>
+<td>ただし IP は <strong>sword（攻撃）にも shield（防御）にも</strong>使われる</td>
+</tr>
+<tr>
+<td>13</td>
+<td>命を救う技術への幅広いアクセスを支持する理論</td>
+<td><strong>Utilitarianism</strong></td>
+<td>utility＝公共財（病院・学校・道路）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>必須医薬品の特許、低所得国に高すぎる価格</td>
+<td><strong>IP rights vs public welfare</strong></td>
+<td><strong>evergreening</strong>（Panadol, スマホ/OSの旧版サポート終了）</td>
+</tr>
+<tr>
+<td>15</td>
+<td>著作権が主に守るもの</td>
+<td><strong>Creative works</strong></td>
+<td>videos, books, websites, photos</td>
+</tr>
+<tr>
+<td>16</td>
+<td>出典なしで段落をコピー</td>
+<td><strong>Plagiarism</strong></td>
+<td>attribution がない</td>
+</tr>
+<tr>
+<td>17</td>
+<td>「ソフトは無料であるべき」と著作権ソフトをアップロード</td>
+<td><strong>Utilitarianism</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>商標が消費者に識別させるもの</td>
+<td><strong>Source of goods and services</strong></td>
+<td>出所（会社・国・品質）</td>
+</tr>
+<tr>
+<td>19</td>
+<td>有名ロゴをコピー → 誤認するのは</td>
+<td><strong>Consumers</strong></td>
+<td>= <strong>passing off</strong>。業種が違えば混同なしと主張可（Genting事件参照）</td>
+</tr>
+<tr>
+<td>20</td>
+<td>新会社が有名ブランドそっくりのロゴ → 違反する原則</td>
+<td><strong>Honesty and trustworthiness</strong></td>
+<td>起業時は既存ロゴを検索・比較すること</td>
+</tr>
+<tr>
+<td>21</td>
+<td>政府が特許を与える理由</td>
+<td><strong>To recognise innovation and encourage research</strong></td>
+<td>IP＝会社の価値・経済への貢献</td>
+</tr>
+<tr>
+<td>22</td>
+<td>前職の機密特許情報を使って競合製品 → ACM原則</td>
+<td><strong>Honour confidentiality</strong></td>
+<td>NDA / confidentiality agreement</td>
+</tr>
+<tr>
+<td>23</td>
+<td>スマートデバイスのデータ収集で生じる懸念</td>
+<td><strong>Privacy</strong></td>
+<td>どこに保存？何年？退職・機種変更で削除される？</td>
+</tr>
+<tr>
+<td>24</td>
+<td>スマートホームが無通知で音声録音 → 自然権論で侵害される権利</td>
+<td><strong>Right to privacy</strong></td>
+<td>T&amp;C に書けばOK？誰も読まない → 倫理的に疑問</td>
+</tr>
+<tr>
+<td>25</td>
+<td>IP保護の直接の受益者</td>
+<td><strong>The innovator / creator</strong></td>
+<td>royalties</td>
+</tr>
+<tr>
+<td>26</td>
+<td>大学が著作物を無断でAI開発に使用 → 最初に生じる問題</td>
+<td><strong>IP infringement</strong></td>
+<td>公立大学・非営利でも侵害</td>
+</tr>
+<tr>
+<td>27</td>
+<td>AI会社が無断で数百万人の著作物で学習、「社会の利益」と主張</td>
+<td><strong>Competing stakeholder interests between creators' rights and societal benefit</strong></td>
+<td>学習の社会的利益はあるが <strong>著作者の consent がない</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section><section class="sec selftest"><h2 id="5">5. 白紙テスト（何も見ずに答える → 「答え」を開いて確認）</h2>
+<h3 id="ip_1">IP（★最重要）</h3>
+<p><mark><strong>Q1. Copyright の保護要件3つは？ 期間は？ 登録は必要？</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>① original（自分で作り十分な effort）② material form（固定。見えない storage も可）③ qualified person（市民・永住者）or マレーシアで初出版（他国出版後30日以内も可）。期間：作者の生涯＋50年（film・録音・broadcast は50年）。登録不要（自動）。Voluntary Notification は証拠用。</p>
+</details>
+<p><strong>Q2. Copyright の3種類の権利と moral rights の2つは？</strong></p>
+<details>
+<summary>答え</summary>
+<p>Legal（訴える権利）／Economic（複製・公衆送信・上演・頒布・貸与）／Moral。Moral rights = <strong>paternity</strong>（作者と表示される権利）＋ <strong>integrity</strong>（名誉を害する改変をされない権利）。</p>
+</details>
+<p><strong>Q3. Copyright 侵害の条文、救済の条文と statutory damages の上限は？</strong></p>
+<details>
+<summary>答え</summary>
+<p>侵害 <strong>s36</strong>、救済 <strong>s37</strong>：injunction, damages, account of profits, statutory damages（<strong>1作品 RM25,000、合計 RM500,000</strong>）, other orders。</p>
+</details>
+<p><strong>Q4. Fair dealing の例を5つ</strong></p>
+<details>
+<summary>答え</summary>
+<p>non-profit research, private study, criticism, review, reporting current events（acknowledgement 必要）, parody, 学校・大学での非営利上演, プログラムのバックアップ。</p>
+</details>
+<p><strong>Q5. 雇用中・委託で作った作品の著作権は誰のもの？ 譲渡の方式は？</strong></p>
+<details>
+<summary>答え</summary>
+<p>雇用主／委託者（反対の契約がなければ）。政府の指示下の作品は政府。譲渡（assignment）は<strong>書面必須</strong>（s27(3)）。</p>
+</details>
+<p><mark><strong>Q6. Patent の3要件（条文）と期間。Utility innovation の期間は？</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p><strong>s11 Patents Act 1983</strong>：new（novelty）／inventive step（その分野の専門家に non-obvious）／industrially applicable。期間：出願日から<strong>20年</strong>。Utility innovation <strong>10年</strong>。</p>
+</details>
+<p><strong>Q7. 特許にできないものを4つ</strong></p>
+<details>
+<summary>答え</summary>
+<p>discovery・scientific theory・mathematical method／literary・artistic works／scheme, rule, method of doing business, playing a game, <strong>computer programs</strong>／presentation of information／手術・治療方法。</p>
+</details>
+<p><mark><strong>Q8. Trademark の定義（英語）、期間、根拠法、未登録のときの訴え</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>"A sign which distinguishes the goods and services of one trader from those of another." 10年、10年ごとに無限更新（s41）。<strong>Trademarks Act 2019</strong>。未登録 → <strong>passing off</strong>（goodwill を守る、s82(2)）。</p>
+</details>
+<p><strong>Q9. Trademark 侵害の救済5つ</strong></p>
+<details>
+<summary>答え</summary>
+<p>permanent injunction／delivery up of offending goods／damages／account of profits／declaration of infringement。</p>
+</details>
+<p><strong>Q10. Cybersquatting / typosquatting の意味と判例</strong></p>
+<details>
+<summary>答え</summary>
+<p>Cybersquatting：他人の商標をドメイン登録して売りつける → Panavision v Toeppen／Google v Jing Ren（android.co.in、bad faith）。Typosquatting：打ち間違いを狙った類似ドメイン → Paine Webber v wwwpainewebber.com。</p>
+</details>
+<p><mark><strong>Q11. 「IP owner の権利が侵害された。何を勧める？」7つ</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>① prohibitory injunction（使用停止）② mandatory injunction（変更・削除させる）③ damages（金銭賠償）④ account of profits ⑤ statutory damages（copyright）⑥ delivery up / destruction ⑦ negotiation / out-of-court settlement / licensing（Chatime と Tealive）。＋ IPを MyIPO に登録、証拠の保全、ex-staff への措置。</p>
+</details>
+<p><strong>Q12. Paris / Berne / TRIPS / WIPO Copyright Treaty を一言で</strong></p>
+<details>
+<summary>答え</summary>
+<p>Paris 1883：工業所有権、national treatment、priority right（特許12ヶ月・商標/意匠6ヶ月）。Berne 1886：著作権、自動保護、最低50年。TRIPS 1994：WTO、最低基準＋強い執行、最恵国待遇。WCT 1996：デジタル環境、プログラム・データベース保護、技術的保護手段の回避への救済。</p>
+</details>
+<h3 id="ethics-acm">Ethics / ACM</h3>
+<p><strong>Q13. ACM 1.1〜1.7 を英語で</strong></p>
+<details>
+<summary>答え</summary>
+<p>1.1 Contribute to society and to human well-being／1.2 Avoid harm／1.3 Be honest and trustworthy／1.4 Be fair and take action not to discriminate／1.5 Respect the work required to produce new ideas, inventions, creative works／1.6 Respect privacy／1.7 Honor confidentiality</p>
+</details>
+<p><mark><strong>Q14. 3つの倫理理論：提唱者・キーワード・覚え方</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>Deontology（Kant）：duty, absolute rules, universality → morality。Utilitarianism（Bentham）：greatest good for the greatest number, consequentialist → "utility" = 公共財。Natural Rights（Locke）：autonomy, liberty, property, privacy → respect for individuality。</p>
+</details>
+<p><strong>Q15. 「AI生成物を自分の作品として提出」に使える ACM 原則3つと理論2つ</strong></p>
+<details>
+<summary>答え</summary>
+<p>ACM 1.3 honest &amp; trustworthy／1.5 respect creative works（既存作品に似ている）／1.2 avoid harm（2.2 competence も可）。Deontology（嘘は結果に関係なく悪）＋ Utilitarianism（本人の短期的な得 vs 多数への害）。</p>
+</details>
+<p><mark><strong>Q16. Competing rights の典型ペアを5つ</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>users' privacy vs company's commercial interest／creators' IP rights vs public access &amp; innovation／freedom of expression vs reputation &amp; public order／public's right to know vs individual privacy &amp; security／government regulation (public interest) vs commercial freedom／user autonomy vs protection of minors。</p>
+</details>
+<h3 id="legal-issues">Legal issues</h3>
+<p><strong>Q17. PDPA の7原則と2024年改正の主な変更</strong></p>
+<details>
+<summary>答え</summary>
+<p>General（同意）・Notice and Choice・Disclosure・Security・Retention・Data Integrity・Access。改正：漏洩の通知義務（Commissioner へ、目安72時間）・DPO の選任・data portability・罰金上限 RM1M / 3年・biometric が sensitive data に。</p>
+</details>
+<p><strong>Q18. GDPR の漏洩通知期限、right to be forgotten の判例</strong></p>
+<details>
+<summary>答え</summary>
+<p>72時間。Google Spain v Costeja Gonzalez（2014）、Google v CNIL（2019、EU域内に限定）。</p>
+</details>
+<p><strong>Q19. CCA 1997 s3/s4/s5/s6 と罰則、actus reus と mens rea</strong></p>
+<details>
+<summary>答え</summary>
+<p>s3 unauthorised access（RM50k/5年）／s4 さらなる犯罪の意図を伴う s3（RM150k/10年）／s5 unauthorised modification（RM100k/7年、傷害意図なら RM150k/10年）／s6 wrongful communication of password（RM25k/3年）。Actus reus = 行為（コンピュータに機能を実行させる）、Mens rea = 意図＋無許可だという認識。</p>
+</details>
+<p><strong>Q20. Federal Constitution Art 10(1)・10(2)、CMA s233 の罰則</strong></p>
+<details>
+<summary>答え</summary>
+<p>10(1)(a) 市民の言論・表現の自由。10(2) 議会は security, public order, morality, defamation, contempt of court, incitement のために制限できる。s233：RM50,000以下 or 1年以下 or 両方、継続中は1日 RM1,000。</p>
+</details>
+<p><strong>Q21. Defamation の4要件、libel と slander、抗弁3つ</strong></p>
+<details>
+<summary>答え</summary>
+<p>statement／false／refers to the claimant／published to a third party。Libel = 永続的な形（書籍・メール・画像）、Slander = 一時的な形（口頭・身振り）。抗弁：truth, fair comment on public interest, absolute privilege。</p>
+</details>
+<h3 id="_15">答案技術</h3>
+<p><mark><strong>Q22. 10点問題は何ポイント？ 各ポイントの3要素は？</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>約3ポイント＋elaboration。definition ＋ explanation ＋ example（シナリオへの当てはめ）。15点なら5〜6ポイント。</p>
+</details>
+<p><mark><strong>Q23. 1問何分？ 箇条書きでいい？</strong></mark></p>
+<details>
+<summary>答え</summary>
+<p>約30分（4問で2時間＋読む時間10〜15分）。箇条書きはNG、文章で書く。competing rights を最低2組入れる。</p>
+</details></section>
+  </main>
+</div>
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const store=JSON.parse(localStorage.getItem('ipeli-done')||'{}');
+const save=()=>localStorage.setItem('ipeli-done',JSON.stringify(store));
+
+// checkboxes: §3 questions (h4) and §5 questions
+const items=[];
+$$('section.answers h4').forEach(h=>items.push([h,h.id||h.textContent.slice(0,40)]));
+$$('.selftest p').filter(p=>/^Q\d+\./.test(p.textContent.trim())).forEach(p=>items.push([p,'st-'+p.textContent.trim().match(/^Q\d+/)[0]]));
+items.forEach(([el,key])=>{
+  const c=document.createElement('input'); c.type='checkbox'; c.className='chk';
+  c.setAttribute('aria-label','覚えた'); c.checked=!!store[key];
+  c.addEventListener('change',()=>{store[key]=c.checked; save(); progress();});
+  el.prepend(c);
+});
+
+// table of contents with per-section progress
+const toc=$('#toc');
+$$('main h2, main h3').forEach(h=>{
+  if(!h.id) return;
+  const a=document.createElement('a'); a.href='#'+h.id; a.className=h.tagName.toLowerCase();
+  a.innerHTML='<span>'+h.textContent+'</span>'; toc.append(a);
+  if(h.tagName==='H2'){a.dataset.sec=1; h._link=a;}
+  else{h._link=a;}
+});
+function progress(){
+  const all=$$('.chk'), done=all.filter(c=>c.checked).length;
+  $('#count').textContent=`覚えた ${done}/${all.length}`;
+  $$('section.sec').forEach(s=>{
+    const cs=$$('.chk',s), link=$('h2',s)._link; if(!cs.length||!link) return;
+    let p=$('.p',link); if(!p){p=document.createElement('span'); p.className='p'; link.append(p);}
+    p.textContent=`${cs.filter(c=>c.checked).length}/${cs.length}`;
+  });
+}
+progress();
+const heads=$$('main h2[id], main h3[id]');
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){$$('a.here',toc).forEach(a=>a.classList.remove('here')); e.target._link?.classList.add('here');}
+}),{rootMargin:'-60px 0px -75% 0px'});
+heads.forEach(h=>io.observe(h));
+$('#tocBtn').onclick=e=>{const o=toc.classList.toggle('open'); e.target.setAttribute('aria-expanded',o);};
+toc.addEventListener('click',e=>{if(e.target.closest('a')){toc.classList.remove('open'); $('#tocBtn').setAttribute('aria-expanded',false);}});
+
+// recall mode + tap to reveal
+const rb=$('#recall');
+const setRecall=on=>{document.body.classList.toggle('recall',on); rb.setAttribute('aria-pressed',on);
+  if(!on) $$('.recallable .shown').forEach(s=>s.classList.remove('shown'));};
+rb.onclick=()=>setRecall(rb.getAttribute('aria-pressed')!=='true');
+document.addEventListener('click',e=>{
+  const s=document.body.classList.contains('recall')&&(e.target.closest('.recallable mark')||e.target.closest('.recallable strong'));
+  if(s&&!s.closest('h4')) s.classList.toggle('shown');
+  const td=e.target.closest('.drill td'); if(td&&td.cellIndex>=2) td.classList.toggle('shown');
+});
+
+// 最低限モード: hide headings whose block has no must-know mark
+$$('.sec:not(.mustsec) :is(h3,h4,h5)').forEach(h=>{
+  const lv=+h.tagName[1]; let n=h.nextElementSibling, has=false;
+  while(n&&!(/^H[2-5]$/.test(n.tagName)&&+n.tagName[1]<=lv)){
+    if(n.matches('mark, .rights')||n.querySelector('mark')){has=true;break;} n=n.nextElementSibling;}
+  if(!has){h.classList.add('nomust'); h._link?.classList.add('nomust');}
+});
+const mb=$('#must');
+const setMust=on=>{document.body.classList.toggle('must',on); mb.setAttribute('aria-pressed',on); localStorage.setItem('ipeli-must',on?'1':'');};
+mb.onclick=()=>setMust(mb.getAttribute('aria-pressed')!=='true');
+if(localStorage.getItem('ipeli-must')) setMust(true);
+
+// drill + self-test helper buttons
+const drill=$('section.drill');
+if(drill){const t=document.createElement('div'); t.className='tools';
+  t.innerHTML='<button>答えを全部表示</button><button>全部隠す</button>';
+  const [show,hide]=$$('button',t);
+  show.onclick=()=>drill.classList.add('all');
+  hide.onclick=()=>{drill.classList.remove('all'); $$('td.shown',drill).forEach(td=>td.classList.remove('shown'));};
+  $('table',drill).before(t);}
+const st=$('section.selftest');
+if(st){const t=document.createElement('div'); t.className='tools';
+  t.innerHTML='<button>答えを全部開く</button><button>全部閉じる</button>';
+  const [o,c]=$$('button',t);
+  o.onclick=()=>$$('details',st).forEach(d=>d.open=true);
+  c.onclick=()=>$$('details',st).forEach(d=>d.open=false);
+  $('h2',st).after(t);}
+
+// 30-minute answer timer
+const tb=$('#timer'); let left=1800, tick=null;
+const fmt=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+tb.onclick=()=>{
+  if(tb.classList.contains('done')){left=1800; tb.classList.remove('done'); tb.textContent='30:00 開始'; return;}
+  if(tick){clearInterval(tick); tick=null; tb.textContent=fmt(left)+' 再開'; return;}
+  tick=setInterval(()=>{left--; tb.textContent=fmt(left)+' 一時停止';
+    if(left<=0){clearInterval(tick); tick=null; tb.classList.add('done'); tb.textContent='時間です（リセット）';}},1000);
+  tb.textContent=fmt(left)+' 一時停止';
+};
+</script>
+</body>
+</html>
